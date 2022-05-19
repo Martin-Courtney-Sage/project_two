@@ -1,0 +1,75 @@
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users (
+	userID SERIAL PRIMARY KEY,
+	firstname VARCHAR (100),
+	lastname VARCHAR (100),
+	email VARCHAR (100),
+	phone VARCHAR (100)
+);
+
+INSERT INTO Users VALUES (DEFAULT, 'Jane', 'Smith', 'JS2022@gmail.com', '555-7882');
+
+DROP TABLE IF EXISTS Login;
+CREATE TABLE Login (
+	loginID SERIAL PRIMARY KEY,
+	userID INT REFERENCES Users (userID) NOT NULL,
+	username VARCHAR (100),
+	passcode VARCHAR (100)
+);
+
+INSERT INTO Login VALUES (DEFAULT, 1, 'test101', 'pass1234');
+
+DROP TABLE IF EXISTS Accounts;
+CREATE TABLE Accounts (
+	acctID SERIAL PRIMARY KEY,
+	userID INT REFERENCES Users (userID) NOT NULL,
+	accountType VARCHAR(100),
+	accountBalance NUMERIC(6,0) CHECK (acccountBalance >=0),
+	
+);
+
+INSERT INTO Accounts VALUES ();
+
+DROP TABLE IF EXISTS RequestCredit;
+CREATE TABLE RequestCredit (
+	reqID SERIAL PRIMARY KEY,
+	userID INT REFERENCES Users (userID) NOT NULL,
+	cardType VARCHAR (100),
+	creditLimit NUMERIC,
+	reqStatus VARCHAR (100)
+);
+
+INSERT INTO RequestCredit VALUES ();
+
+DROP TABLE IF EXISTS RequestLoan;
+CREATE TABLE RequestLoan (
+	reqID SERIAL PRIMARY KEY,
+	userID INT REFERENCES Users (userID) NOT NULL,
+	acctID INT REFERENCES Accounts (acctID) NOT NULL,
+	loanAmount NUMERIC,
+	loanTerm VARCHAR (100),
+	loanType VARCHAR (100),
+	loanStatus VARCHAR (100)
+);
+
+INSERT INTO RequestLoan VALUES ();
+
+DROP TABLE IF EXISTS RequestJob;
+CREATE TABLE RequestJob (
+	reqID SERIAL PRIMARY KEY,
+	userID INT REFERENCES Users (userID) NOT NULL,
+	positionApp VARCHAR (100),
+	jobStatus VARCHAR (100)
+);
+
+INSERT INTO RequestJob VALUES ();
+
+DROP TABLE IF EXISTS Permissions;
+CREATE TABLE Permissions (
+	permID SERIAL PRIMARY KEY,
+	loginID INT REFERENCES Login (loginID) NOT NULL,
+	adminPerm VARCHAR (100),
+	generalUser VARCHAR (100)
+);
+
+INSERT INTO Permissions VALUES ();
