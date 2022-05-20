@@ -24,7 +24,7 @@ CREATE TABLE Accounts (
 	acctID SERIAL PRIMARY KEY,
 	userID INT REFERENCES Users (userID) NOT NULL,
 	accountType VARCHAR(100),
-	accountBalance NUMERIC(6,0) CHECK (acccountBalance >=0),
+	accountBalance NUMERIC(6,0) CHECK (accountBalance >=0)
 	
 );
 
