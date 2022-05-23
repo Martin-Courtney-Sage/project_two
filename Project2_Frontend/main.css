@@ -1,0 +1,11 @@
+#output {
+    float: left;
+    padding-left: 5%;
+    padding-right: 20%;
+    padding-bottom: 5%;
+}
+
+#input {
+    position: relative;
+    float: right;  
+}
