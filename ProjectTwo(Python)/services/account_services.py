@@ -10,13 +10,13 @@ class AccountService:
     # CRUD OPERATIONS
 
     def create_account(self, user_id):
-        return self.account_repo.create_acount(user_id)
+        return self.account_repo.create_account(user_id)
 
-    def get_account(self, user_id):
-        return self.account_repo.get_account(user_id)
+    def get_account(self, acct_id):
+        return self.account_repo.get_account(acct_id)
 
-    def get_all_accounts(self):
-        return self.account_repo.get_all_accounts()
+    def get_all_accounts(self, user_id):
+        return self.account_repo.get_all_accounts(user_id)
 
     def update_account(self, change):
         return self.account_repo.update_account(change)
