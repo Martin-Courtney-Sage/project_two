@@ -14,22 +14,13 @@ function bot() {
 	div.innerHTML = " " + document.getElementById("usermsg").value;
     document.getElementById('input').appendChild(div); // output response
 
-
-
-	// create an array of tasks to complete and navigate
-	// cycle through the array to see if the input the user submitted is in there
-	// clarify if that is what they want
-	// proceed with task
-
 	if (questionNum == 0) {
 		var div = document.createElement('div');
-        question = "How can I help you today?";
+        question = "how old are you";
 
         div.className = 'row';
 
-		// fname is the stored information from the login
-
-        div.innerHTML = "<p> hey " + fname + ", . " + question + "?</p>";
+        div.innerHTML = "<p> hey " + answer + ", i'm chattybot. " + question + "?</p>";
 
         document.getElementById('output').appendChild(div); // output response 
 		document.getElementById("usermsg").value = ""; // clear text box
@@ -39,7 +30,7 @@ function bot() {
        
         div.className = 'row';
 
-        div.innerHTML = "<p> So you are looking to " + keyword + ", right?</p>";
+        div.innerHTML = "<p> that means you were born in " + (2017 - answer) + ", right?</p>";
 
         document.getElementById('output').appendChild(div); // output response 
 		document.getElementById("usermsg").value = ""; // clear text box
@@ -47,13 +38,11 @@ function bot() {
 
 	if (questionNum == 2 && (['yes', 'yup', 'yeah', 'y', 'correct', 'right',].indexOf(answer) >= 0)) {
 		var div = document.createElement('div');
-		question = "Great! Let me help you navigate there";
-
-		// links and window.location changes
+		question = "when is your birthday";
 
         div.className = 'row';
 
-        div.innerHTML = "<p>Is there anything else I can help you with " + question + "?</p>";
+        div.innerHTML = "<p> that's great! " + question + "?</p>";
 
         document.getElementById('output').appendChild(div); // output response 
 		document.getElementById("usermsg").value = ""; // clear text box
@@ -62,7 +51,19 @@ function bot() {
 
         div.className = 'row';
 
-        div.innerHTML = "<p> so, what were you looking to do...[examples] ?</p>";
+        div.innerHTML = "<p> so, what year where you born?</p>";
+
+        document.getElementById('output').appendChild(div); // output response 
+		document.getElementById("usermsg").value = ""; // clear text box
+	}
+
+	if (questionNum == 3) {
+		var div = document.createElement('div');
+		question = "Question four";
+
+        div.className = 'row';
+
+        div.innerHTML = "<p> goodbye.</p>";
 
         document.getElementById('output').appendChild(div); // output response 
 		document.getElementById("usermsg").value = ""; // clear text box
@@ -79,10 +80,10 @@ function bot() {
 	}
 }
 
-// figure out on click of send button -- right now its just when key enter is pressed
-
 $(document).keypress(function(e) {
     if (e.which == 13) {
-    			    //increase questionNum count by 1
+    bot();						//run bot function when enter key pressed
+    questionNum++;			    //increase questionNum count by 1
+    
     }
 });
