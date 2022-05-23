@@ -49,3 +49,49 @@ def route(app):
     def del_account(acct_id):
         acc.del_account(acct_id)
         return f"{acct_id} has been deleted", 204
+
+    @app.route("/account/<acct_id>/withdraw/<funds>", methods=['PATCH'])  # withdraw funds
+    def withdraw_funds(acct_id, funds):
+        body = request.json
+        try:
+            if "withdraw" in body:  # type "withdraw" in the body section of the JSON
+                remaining_balance = acc.withdraw_funds(acct_id, funds)
+                account = Accounts(acct_id=acct_id, account_type=body["accountType"], account_balance=remaining_balance)
+                acc.update_account(account)
+                return f"The new balance of Account ID: {acct_id} is {remaining_balance}", 200
+            else:
+                return "Insufficient Funds", 422
+        except ResourceNotFound as r:
+            return r.message, 404
+
+    @app.route("/account/<acct_id>/deposit/<funds>", methods=['PATCH'])  # deposit funds
+    def deposit_funds(acct_id, funds):
+        body = request.json
+        try:
+            if "deposit" in body:  # type "deposit" in the body section of the JSON
+                remaining_balance = acc.deposit_funds(acct_id, funds)
+                account = Accounts(acct_id=acct_id, account_type=body["accountType"], account_balance=remaining_balance)
+                acc.update_account(account)
+                return f"The new balance of Account ID: {acct_id} is {remaining_balance}", 200
+        except ResourceNotFound as r:
+            return r.message, 404
+
+    @app.route("/account/<acct_id_from>/transfer/<acct_id_too>/<funds>", methods=['PATCH'])
+    def transfer_funds(acct_id_from, acct_id_too, funds):
+        body = request.json
+        try:
+            if "transfer" in body:  # type "transfer" in the body section of the JSON
+                remaining_balance1 = acc.withdraw_funds(acct_id_from, funds)
+                account = Accounts(acct_id=acct_id_from, account_type=body["accountTypeFrom"],
+                                   account_balance=remaining_balance1)
+                acc.update_account(account)
+                remaining_balance2 = acc.deposit_funds(acct_id_too, funds)
+                account = Accounts(acct_id=acct_id_too, account_type=body["accountTypeToo"],
+                                   account_balance=remaining_balance2)
+                acc.update_account(account)
+                return f"Funds have been transferred. Account ID: {acct_id_from}={remaining_balance1}." \
+                       f"Account ID: {acct_id_too}={remaining_balance2}."
+            else:
+                return "Insufficient Funds", 422
+        except ResourceNotFound as r:
+            return r.message, 404
