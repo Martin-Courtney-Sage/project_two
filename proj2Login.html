@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login Page</title>
+    
+            <style>  
+            body{
+                color:rgb(55, 8, 187);
+            }
+            table{
+                margin: 5px;
+                padding: 5px;
+                width: 5px;
+                
+            }
+
+            .starscell{
+                border: 1px dashed blue;
+                width: 1px;
+                text-align: 50%;
+                border-collapse: collapse;
+            }
+        </style>
+    <style>
+        .header {
+            text-align: right
+        }
+
+        #myTable th,
+        #myTable td {
+            border: 1px solid black;
+            width: 33%;
+        }
+    </style>
+</head>
+
+<body style="background-color:rgb(160, 158, 158);">
+
+
+    <body><p style="text-align:left;">2022 Project 2 </p>
+     <h1>
+        <p style="text-align:center;">Revature Bank</p>
+     </h1>
+      <table  style="text-align:right;", align="right" >
+        <tr>
+            <td class="header"><label for="usernameInput">Username:</label></td>
+            <td><input type="text" id="usernameInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="passwordInput">Password:</label></td>
+            <td><input type="password" id="passwordInput" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button onclick="userLogin()">Login</button>
+                <button onclick="userLogin()"><a href="C:\Users\Gabriel Charles\Desktop\Revature\Training\Classwork\VisualStudioCode\HTMLCSS\proj2Register.html" target="_blank">Register</a></button></td>
+        </tr>
+    </table>
+     <p style="text-align:center;">Welcome to our bank</p>
+     <ar></ar>
+     <div>
+         <h2><p style="text-align:left;">Our Investors</p></h2>
+         <img src="C:\Users\Gabriel Charles\Desktop\Revature\Training\SileniumExample\investors.jpg" height="250" width=" 450" style="margin-left: 10px;"/>
+        <br>
+        <a href = "https://www.youtube.com/" style="margin-right: 10px;" target="_blank">Click here to learn more</a>
+    </div>
+    <p style="text-align:right;">About Us.............................................................................................<br>
+     <br>We are a very reputable Bank.............................................................. <br>
+     you can contact us at 555-555-5555....................................................
+     </p>
+    <table id="bankTable" style="border: 10px solid black;">
+        <tr>
+            <th>Build</th>
+            <th>Since</th>
+            <th>November</th>
+            <th>1960</th>
+        </tr>
+        <tr>
+            <th>by</th>
+            <th>the</th>
+            <th>American</th>
+            <th>group</th>
+        </tr>
+    </table>
+
+    <p>
+        ........................................................Our page is still under construction. Please come visit our page often<br/>
+    </p>
+
+    <hr>
+    <br>
+
+</body>
+<script>
+
+    let userLogin = async function () {
+
+    let usernameVal = document.getElementById("usernameInput").value
+    let passwordVal = document.getElementById("passwordInput").value
+
+    var databaseusername
+    var databasepassword
+    var checkifadmin  
+    var userIdtobesave
+
+ //async function finduser(usernameVal)
+  // { 
+    var found = false;
+        for (var i=1; !found && i<15; i++)
+         {
+            const httpResponse = await fetch("http://localhost:5000/login/"+i)
+            const body = await httpResponse.json()
+            
+        if (usernameVal == body.username) {
+            found = true;
+            databaseusername = body.username
+            databasepassword = body.password
+            checkifadmin = body.isadmin
+            userIdtobesave = i
+            if (found) {
+                 alert("match found for " + usernameVal)
+                 }        
+            else {
+                 alert(usernameVal + " its not there")
+                 }
+            }
+ }
+       
+        let user = {
+            username: usernameVal,
+            password: passwordVal,
+        }
+
+        let userJSON = JSON.stringify(user)
+        console.log(userJSON)
+
+        let pretendResponse = JSON.parse(userJSON)
+
+        console.log(pretendResponse)
+
+        if (checkifadmin == 1 && pretendResponse && ((databaseusername == usernameVal)&&(databasepassword == passwordVal))) {
+            alert(" Administrator Loging, press ok")
+            window.location.href = "file:///C:/Users/Gabriel%20Charles/Desktop/Revature/Training/Classwork/VisualStudioCode/TuitionProject/adminPage.html";
+        }
+
+        else if (pretendResponse && ((databaseusername == usernameVal)&&(databasepassword == passwordVal))) {
+            alert("User Loging Successfull!")
+            window.location.href = "file:///C:/Users/Gabriel%20Charles/Desktop/Revature/Training/Classwork/VisualStudioCode/TuitionProject/proj2MainPage.html";
+        }
+        else {
+            alert("Unsuccessfull, please try again")
+        }  
+
+
+console.log("Adding User to temporary database....")
+
+const data = {
+    loginId: userIdtobesave
+}
+
+const url = "http://localhost:5000/login"
+
+const httpResponse = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data)
+});
+
+const body = await httpResponse.json();
+
+console.log(body);
+if (body) {
+    alert("user ID Successfully added!")
+} else {
+    alert("User ID Failed to be added.")
+}
+
+}        
+
+</script>
+</html>

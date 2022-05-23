@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Register Page</title>
+
+    <style>
+        .header {
+            text-align: right
+        }
+
+        #myTable th,
+        #myTable td {
+            border: 1px solid black;
+            width: 33%;
+        }
+    </style>
+     <h1>
+        <p style="text-align:center;">Revature Bank</p>
+     </h1>
+</head>
+
+<body style="background-color:rgb(141, 140, 140);">
+    <p style="text-align:left;">Please fill out your information <br>
+        to be able to logging and register.</p>
+    <table>
+        <tr>
+            <td class="header"><label for="firstNameInput">First Name:</label></td>
+            <td><input type="text" id="firstNameInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="lastNameInput">Last Name:</label></td>
+            <td><input type="text" id="lastNameInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="emailInput">Email:</label></td>
+            <td><input type="email" id="emailInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="userNameInput">Create Username:</label></td>
+            <td><input type="text" id="userNameInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="passwordInput">Create Password:</label></td>
+            <td><input type="password" id="passwordInput" /></td>
+        </tr>
+        <tr>
+            <td><button onclick="registerUser()"><a href="file:///C:/Users/Gabriel%20Charles/Desktop/Revature/Training/Classwork/VisualStudioCode/TuitionProject/formPage.html" target="_blank">Register</a></button></td>
+        </tr>
+    </table>
+    <hr>
+    <br>
+    
+
+</body>
+<script>
+
+    async function registerUser() {
+
+        console.log("Adding user....")
+
+        const firstNameVal = document.getElementById("firstNameInput").value
+        const lastNameVal = document.getElementById("lastNameInput").value
+        const emailVal = document.getElementById("emailInput").value
+        const userVal = document.getElementById("userNameInput").value
+        const passwordVal = document.getElementById("passwordInput").value
+
+       // let availableVal = false;
+
+        // const radios = document.getElementsByName("availability");
+        // radios.forEach(radio => {
+        //     if(radio.checked) {
+        //         availableVal = radio.value
+        //     }
+        // })
+
+        //availableVal = document.querySelector('input[name="availability"]:checked').value
+
+        console.log(firstNameVal)
+        console.log(lastNameVal)
+        console.log(emailVal)
+        console.log(userVal)
+        console.log(passwordVal)
+
+        const data = {
+            FirstName: firstNameVal,
+            LastName: lastNameVal,
+            email: emailVal,
+            user: userVal,
+            password: passwordVal
+        }
+
+       /* const url = "http://localhost:5000/students"
+
+        const httpResponse = await fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const body = await httpResponse.json();
+
+        console.log(body);
+        if (body) {
+            alert("User Successfully Added!")
+        } else {
+            alert("User Failed to be added.")
+        } 
+        */
+    }
+
+</script>
+<!-- <script>
+
+    let age = document.getElementById("ageInput")
+    age.onkeyup = () => {
+        // console.log(age.value)
+        if (age.value < 0 || age.value == "") {
+            age.value = 0
+        }
+    }
+
+    let registerUser = function () {
+
+        let firstnameVal = document.getElementById("firstNameInput").value
+        let lastnameVal = document.getElementById("lastNameInput").value
+        let emailVal = document.getElementById("emailInput").value
+        let ageVal = document.getElementById("ageInput").value
+        let gradeVal = document.getElementById("gradeInput").value
+        let courseVal = document.getElementById("courseInput").value
+        let usernameVal = document.getElementById("userNameInput").value
+        let passwordVal = document.getElementById("passwordInput").value
+
+        console.log(firstnameVal)
+        console.log(lastnameVal)
+        console.log(emailVal)
+        console.log(ageVal)
+        console.log(gradeVal)
+        console.log(courseVal)
+        console.log(usernameVal)
+        console.log(passwordVal)
+
+        let user = {
+            firstname: firstnameVal,
+            lastname: lastnameVal,
+            email: emailVal,
+            age: ageVal,
+            grade: gradeVal,
+            course: courseVal,
+            username: usernameVal,
+            password: passwordVal,
+        }
+
+        console.log(user)
+
+        let userJSON = JSON.stringify(user)
+        console.log(userJSON)
+
+        let pretendResponse = JSON.parse(userJSON)
+
+        console.log(pretendResponse)
+
+        if (pretendResponse) {
+            alert("User Added!")
+        }
+
+    }
+</script> -->
+
+
+</html>
