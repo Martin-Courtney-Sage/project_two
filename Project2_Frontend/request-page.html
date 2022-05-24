@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Request Page</title>
+    <!--navigation top style sheet-->
+	<link rel="stylesheet" href="navigation-top.css">
+	<!--navigation to sidebar style sheet-->
+	<link rel="stylesheet" href="sidebar-nav.css">
+</head>
+<body>
+    <!--navigation top-->
+	<div class="topnav" id="myTopnav">
+	    <a id="home-page" class="glossymenu" href="bankWelcomePage.html"> WELCOME :::</a>
+		<a id="profile-page" class="glossymenu" href="user-profile.html">::: USER PROFILE :::</a>
+		<a id="loan-page" class="glossymenu" href="proj2Login.html"> ::: AUTO LOAN :::</a>
+		<a id="credit-page" class="glossymenu" href="http://1"> ::: CREDIT CARD :::</a>
+		<a id="about-page" class="glossymenu" href="#"onClick="window.open('http://','WindowA','width=400,height=600,scrullbars=no');">::: ABOUT US :::</a>
+		<a id="investor-page" class="glossymenu" href="http://w">::: INVESTOR :::</a>
+		<a id="special-offer-page" class="glossymenu" href="http://www.">::: OUR SPECIAL OFFER :::</a>
+  		<a id="login-page" class="glossymenu" href="proj2Login.html">::: LOGIN / SIGNUP</a></div>
+    </div>
+	<!--end of navigation top-->
+
+    <div id="mainbody">
+	    <h1>Make a Request Here</h1>
+
+        
+            <label id="requests">Select Your Request Form</label>
+            <select id="requestType">
+                <option selected value="credit">Credit Card Request</option>
+                <option value="loan">Loan Request</option>
+                <option value="job">Job Application Request</option>
+            </select>
+            <button onClick="click()">Select</button>
+        
+
+    </div>
+    <div id="creditTable" >
+        CreditPlaceholder
+    </div>
+    <div id="loanTable"  >
+        LoanPlaceholder
+    </div>
+    <div id="jobTable" >
+        JobPlaceholder
+    </div>
+	<!--side navigation-->
+	<div id="mySidenav" class="sidenav">
+		<a id="profile-home" href="user-profile.html">Profile Home</a>
+		<a id="request-page" href="request-page.html">Make a Request (Credit, Loan, Job)</a>
+	</div>
+	<!--end of side navigation-->
+
+    
+</body>
+<!--JS file for navigation top-->
+<script src="navigation-top.js"></script>
+<script>
+    function click() {
+
+        const requestType = document.getElementById("requestType").value
+        console.log(requestType);
+        if(requestType=="credit"){
+            document.getElementById("creditTable").style.display="block";
+            document.getElementById("loanTable").style.display="none";
+            document.getElementById("jobTable").style.display="none";
+        }
+        else if(requestType=="loan"){
+            document.getElementById("loanTable").style.display="block";
+            document.getElementById("creditTable").style.display="none";
+            document.getElementById("jobTable").style.display="none";
+        }
+        else{
+            document.getElementById("loanTable").style.display="none";
+            document.getElementById("creditTable").style.display="none";
+            document.getElementById("jobTable").style.display="block";
+        }
+
+    }
+</script>
+</html>
