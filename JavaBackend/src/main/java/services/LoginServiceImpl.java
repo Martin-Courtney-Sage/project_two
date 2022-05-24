@@ -24,6 +24,11 @@ public class LoginServiceImpl implements LoginService{
     }
 
     @Override
+    public Login getLoginByUsername(String username) {
+        return lr.getLoginByUsername(username);
+    }
+
+    @Override
     public List<Login> getAllLogins() {
         return lr.getAllLogins();
     }

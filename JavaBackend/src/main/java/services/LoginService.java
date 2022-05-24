@@ -10,6 +10,8 @@ public interface LoginService {
 
     public Login getLoginByUserID(int userID);
 
+    public Login getLoginByUsername(String username);
+
     public List<Login> getAllLogins();
 
     public Login addLogin(Login l);
@@ -21,5 +23,6 @@ public interface LoginService {
     public Login deleteLogin(int id);
 
     Login deleteLoginByUserID(int id);
+
 
 }

@@ -60,6 +60,26 @@ public class LoginRepoImpl implements LoginRepo{
     }
 
     @Override
+    public Login getLoginByUsername(String username) {
+        String sql = "SELECT * FROM login WHERE username = ?";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return buildLogin(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
     public List<Login> getAllLogins() {
         String sql = "SELECT * FROM login";
 

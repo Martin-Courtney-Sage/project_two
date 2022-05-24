@@ -11,6 +11,8 @@ public interface LoginRepo {
 
     public Login getLoginByUserID(int userID);
 
+    public Login getLoginByUsername(String username);
+
     public List<Login> getAllLogins();
 
     public Login addLogin(Login l);

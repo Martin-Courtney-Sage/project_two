@@ -9,6 +9,7 @@ public class Login {
     private String username;
     private String passcode;
 
+
     public Login(){}
 
     public Login(int loginID, int userID, String username, String passcode){

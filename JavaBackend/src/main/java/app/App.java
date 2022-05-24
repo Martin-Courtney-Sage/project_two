@@ -29,13 +29,13 @@ public class App {
         UsersService us = new UsersServiceImpl(ur);
         UsersController uc = new UsersController(us);
 
-        LoginRepo lr = new LoginRepoImpl();
-        LoginService ls = new LoginServiceImpl(lr);
-        LoginController lc = new LoginController(ls);
-
         PermissionsRepo pr = new PermissionsRepoImpl();
         PermissionsService ps = new PermissionsServiceImpl(pr);
         PermissionsController pc = new PermissionsController(ps);
+
+        LoginRepo lr = new LoginRepoImpl();
+        LoginService ls = new LoginServiceImpl(lr);
+        LoginController lc = new LoginController(ls, ps, us);
 
         app.get("/hello", (context) -> context.result("Hello World!"));
         app.get("/hello2", new HelloHandler());
@@ -75,7 +75,14 @@ public class App {
 
             });
 
-            path("permisions", () -> {
+            path("logmein", () -> {
+
+                post(lc.loginFunction);
+
+            });
+
+
+            path("permissions", () -> {
 
                 get(pc.getAllPermissions);
 
