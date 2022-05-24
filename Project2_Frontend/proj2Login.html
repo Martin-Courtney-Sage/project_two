@@ -70,8 +70,8 @@
         </tr>
         <tr>
             <td></td>
-            <td><button onclick="userLogin()">Login</button>
-                <button onclick="userLogin()"><a href="proj2Register.html" target="_blank">Register</a></button></td>
+            <td><button onclick="userLogin();">Login</button>
+                <button onclick=""><a href="proj2Register.html" target="_blank">Register</a></button></td>
         </tr>
     </table>
      <p style="text-align:center;">Welcome to our bank</p>
@@ -123,7 +123,7 @@
 	const url = "http://localhost:7000/logmein"
 
 	// fetch all users and create log of the arrays
-	const user = (
+	const login = (
 		"username" : username,
 		"passcode" : pass
 	)
@@ -132,7 +132,7 @@
 	// headers.set('Authorization',user + ":" + psw);
 	const httpresponse = await fetch(url, {
 		method: 'POST',
-		body: JSON.stringify(user),
+		body: JSON.stringify(login),
 		headers: {
 			"Content-type": "users/json; charset=UTF-8"
 		}
