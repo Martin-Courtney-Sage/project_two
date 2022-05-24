@@ -72,4 +72,4 @@ CREATE TABLE Permissions (
 	generalUser VARCHAR (100)
 );
 
-INSERT INTO Permissions VALUES ();
+INSERT INTO Permissions VALUES (1, 1, "admin", null), (2, 2, null, "generalUser");
