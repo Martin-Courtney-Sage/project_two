@@ -107,26 +107,25 @@
 
     <hr>
     <br>
-
-</body>
 <script>
 
-    async function userLogin (){
+	
+    async function userLogin(){
 
 
 	// get each values from the inputs in the login section [must had an ID]
 
-	const username = document.getElementById("usernameInput").value;
-	const pass = document.getElementById("passwordInput").value;
+	let usernameVal = document.getElementById("usernameInput").value;
+	let pass = document.getElementById("passwordInput").value;
 
-	console.log(username + " " + pass);
+	console.log(usernameVal + " " + pass);
 	const url = "http://localhost:7000/logmein"
 
 	// fetch all users and create log of the arrays
-	const login = (
-		"username" : username,
-		"passcode" : pass
-	)
+	let login = {
+		username: usernameVal,
+		passcode: pass
+    }
 
 	const headers = new Headers();
 	// headers.set('Authorization',user + ":" + psw);
@@ -134,9 +133,10 @@
 		method: 'POST',
 		body: JSON.stringify(login),
 		headers: {
-			"Content-type": "users/json; charset=UTF-8"
+			"Content-type": "application/json; charset=UTF-8"
 		}
 	});
+    console.log(JSON.stringify(login));
 	const body = await httpresponse.json()
 	console.log(body);
 
@@ -154,17 +154,19 @@
 		sessionStorage.setItem("adminPerm", body.adminPerm);
 	} 
 
-	if(body.admin != null) {
+	if(body.adminPerm != null) {
 		window.location = "https://www.google.com"
-	} else if (body.general_user != null) {
+	} else if (body.generalUser != null) {
 		window.location = "https://www.wikipedia.org"
 	} else {
 		alert("Please try again - Log in failure");
 		console.log("failure")
 	}
+	
 }
 
 </script>
+</body>
 <<<<<<< HEAD
 <!--JS file for navigation top-->
 <script src="navigation-top.js"></script>
