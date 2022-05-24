@@ -94,88 +94,58 @@
 </body>
 <script>
 
-    let userLogin = async function () {
-
-    let usernameVal = document.getElementById("usernameInput").value
-    let passwordVal = document.getElementById("passwordInput").value
-
-    var databaseusername
-    var databasepassword
-    var checkifadmin  
-    var userIdtobesave
-
- //async function finduser(usernameVal)
-  // { 
-    var found = false;
-        for (var i=1; !found && i<15; i++)
-         {
-            const httpResponse = await fetch("http://localhost:5000/login/"+i)
-            const body = await httpResponse.json()
-            
-        if (usernameVal == body.username) {
-            found = true;
-            databaseusername = body.username
-            databasepassword = body.password
-            checkifadmin = body.isadmin
-            userIdtobesave = i
-            if (found) {
-                 alert("match found for " + usernameVal)
-                 }        
-            else {
-                 alert(usernameVal + " its not there")
-                 }
-            }
- }
-       
-        let user = {
-            username: usernameVal,
-            password: passwordVal,
-        }
-
-        let userJSON = JSON.stringify(user)
-        console.log(userJSON)
-
-        let pretendResponse = JSON.parse(userJSON)
-
-        console.log(pretendResponse)
-
-        if (checkifadmin == 1 && pretendResponse && ((databaseusername == usernameVal)&&(databasepassword == passwordVal))) {
-            alert(" Administrator Loging, press ok")
-            window.location.href = "file:///C:/Users/Gabriel%20Charles/Desktop/Revature/Training/Classwork/VisualStudioCode/TuitionProject/adminPage.html";
-        }
-
-        else if (pretendResponse && ((databaseusername == usernameVal)&&(databasepassword == passwordVal))) {
-            alert("User Loging Successfull!")
-            window.location.href = "file:///C:/Users/Gabriel%20Charles/Desktop/Revature/Training/Classwork/VisualStudioCode/TuitionProject/proj2MainPage.html";
-        }
-        else {
-            alert("Unsuccessfull, please try again")
-        }  
+    async function userLogin (){
 
 
-console.log("Adding User to temporary database....")
+	// get each values from the inputs in the login section [must had an ID]
 
-const data = {
-    loginId: userIdtobesave
+	const username = document.getElementById("usernameInput").value;
+	const pass = document.getElementById("passwordInput").value;
+
+	console.log(username + " " + pass);
+	const url = "http://localhost:7000/logmein"
+
+	// fetch all users and create log of the arrays
+	const user = (
+		"username" : username,
+		"passcode" : pass
+	)
+
+	const headers = new Headers();
+	// headers.set('Authorization',user + ":" + psw);
+	const httpresponse = await fetch(url, {
+		method: 'POST',
+		body: JSON.stringify(user),
+		headers: {
+			"Content-type": "users/json; charset=UTF-8"
+		}
+	});
+	const body = await httpresponse.json()
+	console.log(body);
+
+
+	if(body.message = null) {
+		sessionStorage.setItem("userID", body.userID);
+        sessionStorage.setItem("firstName", body.firstName);
+        sessionStorage.setItem("lastName", body.lastName);
+        sessionStorage.setItem("username", body.username);
+		sessionStorage.setItem("email", body.email);
+		sessionStorage.setItem("phone", body.phone);
+        sessionStorage.setItem("passcode", body.passcode);
+		sessionStorage.setItem("permID", body.permID);
+		sessionStorage.setItem("generalUser", body.generalUser);
+		sessionStorage.setItem("admin", body.admin);
+	} 
+
+	if(body.admin != null) {
+		window.location = "https://www.google.com"
+	} else if (body.general_user != null) {
+		window.location = "https://www.wikipedia.org"
+	} else {
+		alert("Please try again - Log in failure");
+		console.log("failure")
+	}
 }
-
-const url = "http://localhost:5000/login"
-
-const httpResponse = await fetch(url, {
-    method: "POST",
-    body: JSON.stringify(data)
-});
-
-const body = await httpResponse.json();
-
-console.log(body);
-if (body) {
-    alert("user ID Successfully added!")
-} else {
-    alert("User ID Failed to be added.")
-}
-
-}        
 
 </script>
 </html>
