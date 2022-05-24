@@ -3,6 +3,9 @@
 
 <head>
     <title>Login Page</title>
+
+    <!--navigation top style sheet-->
+	<link rel="stylesheet" href="navigation-top.css">
     
             <style>  
             body{
@@ -37,6 +40,19 @@
 
 <body style="background-color:rgb(160, 158, 158);">
 
+    <!--navigation top-->
+	<div class="topnav" id="myTopnav">
+		<a id="home-page" class="glossymenu" href="bankWelcomePage.html"> WELCOME :::</a>
+		<a id="loan-page" class="glossymenu" href="proj2Login.html"> ::: AUTO LOAN :::</a>
+		<a id="credit-page" class="glossymenu" href="http://1"> ::: CREDIT CARD :::</a>
+		<a id="about-page" class="glossymenu" href="#"onClick="window.open('http://','WindowA','width=400,height=600,scrullbars=no');">::: ABOUT US :::</a>
+		<a id="investor-page" class="glossymenu" href="http://w">::: INVESTOR :::</a>
+		<a id="special-offer-page" class="glossymenu" href="http://www.">::: OUR SPECIAL OFFER :::</a>
+  		<a id="login-page" class="glossymenu" href="proj2Login.html">::: LOGIN / SIGNUP</a></div>
+    </div>
+	<!--end of navigation top-->
+	<br>
+    <br>
 
     <body><p style="text-align:left;">2022 Project 2 </p>
      <h1>
@@ -54,7 +70,7 @@
         <tr>
             <td></td>
             <td><button onclick="userLogin()">Login</button>
-                <button onclick="userLogin()"><a href="C:\Users\Gabriel Charles\Desktop\Revature\Training\Classwork\VisualStudioCode\HTMLCSS\proj2Register.html" target="_blank">Register</a></button></td>
+                <button onclick="userLogin()"><a href="proj2Register.html" target="_blank">Register</a></button></td>
         </tr>
     </table>
      <p style="text-align:center;">Welcome to our bank</p>
@@ -178,4 +194,6 @@ if (body) {
 }        
 
 </script>
+<!--JS file for navigation top-->
+<script src="navigation-top.js"></script>
 </html>
