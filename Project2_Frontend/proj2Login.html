@@ -126,15 +126,15 @@
 
 	if(body.message = null) {
 		sessionStorage.setItem("userID", body.userID);
-        sessionStorage.setItem("firstName", body.firstName);
-        sessionStorage.setItem("lastName", body.lastName);
-        sessionStorage.setItem("username", body.username);
+        	sessionStorage.setItem("firstName", body.firstName);
+       	 	sessionStorage.setItem("lastName", body.lastName);
+        	sessionStorage.setItem("username", body.username);
 		sessionStorage.setItem("email", body.email);
 		sessionStorage.setItem("phone", body.phone);
-        sessionStorage.setItem("passcode", body.passcode);
+        	sessionStorage.setItem("passcode", body.passcode);
 		sessionStorage.setItem("permID", body.permID);
 		sessionStorage.setItem("generalUser", body.generalUser);
-		sessionStorage.setItem("admin", body.admin);
+		sessionStorage.setItem("adminPerm", body.adminPerm);
 	} 
 
 	if(body.admin != null) {
