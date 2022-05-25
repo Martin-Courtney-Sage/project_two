@@ -1,11 +1,11 @@
-from modules.users import Users
-from repositories.users import UserRepo
+from models.users import Users
+from repositories.users_repo import UserRepo
 from exceptions.resource_not_found import ResourceNotFound
 from util.db_connection import connection
 
 
 def _build_user(record):
-    return User(user_id=record[0], first_name=record[1], last_name=record[2], email=record[3], phone=record[4])
+    return Users(user_id=record[0], first_name=record[1], last_name=record[2], email=record[3], phone=record[4])
 
 
 class UserRepoImpl(UserRepo):
