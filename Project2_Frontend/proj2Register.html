@@ -52,6 +52,10 @@
             <td class="header"><label for="emailInput">Email:</label></td>
             <td><input type="email" id="emailInput" /></td>
         </tr>
+		<tr>
+            <td class="header"><label for="phoneInput">Phone:</label></td>
+            <td><input type="text" id="phoneInput" /></td>
+        </tr>
         <tr>
             <td class="header"><label for="userNameInput">Create Username:</label></td>
             <td><input type="text" id="userNameInput" /></td>
@@ -78,6 +82,7 @@
         const firstNameVal = document.getElementById("firstNameInput").value
         const lastNameVal = document.getElementById("lastNameInput").value
         const emailVal = document.getElementById("emailInput").value
+		const phoneVal = document.getElementById("phoneInput").value
         const userVal = document.getElementById("userNameInput").value
         const passwordVal = document.getElementById("passwordInput").value
 
@@ -95,15 +100,17 @@
         console.log(firstNameVal)
         console.log(lastNameVal)
         console.log(emailVal)
+		console.log(phoneVal)
         console.log(userVal)
         console.log(passwordVal)
 
         const data = {
-            FirstName: firstNameVal,
-            LastName: lastNameVal,
+            firstName: firstNameVal,
+            lastName: lastNameVal,
             email: emailVal,
-            user: userVal,
-            password: passwordVal
+			phone: phoneVal
+            username: userVal,
+            passcode: passwordVal
         }
 
        /* const url = "http://localhost:5000/students"
