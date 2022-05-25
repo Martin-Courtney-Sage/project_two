@@ -22,6 +22,7 @@
 	<!--end of navigation top-->
 
     <div id="mainbody">
+        <h1 id="welcome"></h1>
 	    <h1>Make a Request Here</h1>
 
         
@@ -31,18 +32,90 @@
                 <option value="loan">Loan Request</option>
                 <option value="job">Job Application Request</option>
             </select>
-            <button onClick="userclick()">Select</button>
-        
+            <button onclick="getApp()">Select</button> 
 
     </div>
-    <div id="creditTable" >
-        CreditPlaceholder
+    <div id="creditTable" style="display: none;">
+        <table class="center">
+            <tr>
+                <td>Card Type:</td>
+                    <td>
+                        <select id="creditType" name="type" required>
+                            <option value="debit">Debit Card</option>
+                            <option selected value="credit">Credit Card</option>
+                        </select>
+                    </td>
+            </tr>
+            <tr>
+                <td>Credit Limit:</td>
+                <td>
+                    <input id="limit" type="text" name="description" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+                <td>
+                    <p id="creditStatus" type="text" name="credit">PENDING</p>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" onclick="submitAppCredit()">SUBMIT</button>
     </div>
-    <div id="loanTable"  >
-        LoanPlaceholder
+
+    <div id="loanTable"  style="display: none;">
+        <table class="center">
+            <tr>
+                <td>Loan Amount:</td>
+                <td>
+                    <input id="loanAmount" type="text" name="loan amount" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Loan Term:</td>
+                    <td>
+                        <select id="loanTerm" name="description" required>
+                            <option value="12">12 months</option>
+                            <option value="24">24 months</option>
+                            <option value="36">36 months</option>
+                        </select>
+                    </td>
+            </tr>
+            <tr>
+                <td>Loan Type:</td>
+                    <td>
+                        <select id="loanType" name="loantype" required>
+                            <option value="auto">Auto</option>
+                            <option value="home">Home</option>
+                            <option value="personal">Personal</option>
+                            <option value="business">Business</option>
+                        </select>
+                    </td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+                <td>
+                    <p id="loanStatus" type="text" name="loan">PENDING</p>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" onclick="submitAppLoan()">SUBMIT</button>
     </div>
-    <div id="jobTable" >
-        JobPlaceholder
+    <div id="jobTable" style="display: none;">
+        <table class="center">
+            <tr>
+                <td>Position Applying For:</td>
+                    <td>
+                        <input id="job" type="text" name="description" required>
+                    </td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+                <td>
+                    <p id="jobStatus" type="text" name="job">PENDING</p>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" onclick="submitAppJob()">SUBMIT</button>
     </div>
 	<!--side navigation-->
 	<div id="mySidenav" class="sidenav">
@@ -56,7 +129,7 @@
 <!--JS file for navigation top-->
 <script src="navigation-top.js"></script>
 <script>
-    function userclick() {
+    function getApp() {
 
         const requestType = document.getElementById("requestType").value
         console.log(requestType);
@@ -76,6 +149,137 @@
             document.getElementById("jobTable").style.display="block";
         }
 
+    }
+
+</script>
+<script>
+let userID = sessionStorage.getItem('user_id');
+let acctID = sessionStorage.getItem('acct_id')
+let name = sessionStorage.getItem('first_name');
+
+window.onload = function(){
+    document.getElementById("welcome").innerHTML = "Welcome," + " " + name;
+}
+
+async function submitAppCredit(){
+    correct = false;
+    let vals = null
+
+    const creditType = document.getElementById("creditType").value;
+    const limit = document.getElementById("limit").value;
+    const creditStatus = document.getElementById("creditStatus").innerHTML
+
+    console.log("Working")
+
+    const url = `http://127.0.0.1:5000/request`;
+
+    const request = {
+        'userId': userID,
+        'creditType': creditType,
+        'creditLimit': limit,
+        'reqStatus': status
+	}
+
+	console.log(request)
+
+	const httpresponse = fetch(url, {
+		method: 'POST',
+		body: JSON.stringify(request),
+		headers: {
+			"Content-type": "request/json; charset=UTF-8"
+		}
+	});
+
+	httpresponse.then(response => {
+		if(response.status==200){
+			creditStatus = "SUBMITTED"
+            correct = true;
+		}else{
+			alert("Please try again - Could not submit request");
+            console.log("Failure"); 
+		}
+	})    
+}
+
+async function submitAppLoan(){
+    correct = false;
+    let vals = null
+
+    const loanAmount = document.getElementById("loanAmount").value;
+    const loanTerm = document.getElementById("loanTerm").value;
+    const loanType = document.getElementById("loanType").value;
+    const loanStatus = document.getElementById("loanStatus").innerHTML;
+
+    console.log("Working")
+
+    const url = `http://127.0.0.1:5000/request`;
+
+    const request = {
+        'userId': userID,
+        'acctId': acctID,
+        'loanAmount': loanAmount,
+        'loanTerm': loanTerm,
+        'loanType': loanType,
+        'loanStatus': loanStatus
+	}
+
+	console.log(request)
+
+	const httpresponse = fetch(url, {
+		method: 'POST',
+		body: JSON.stringify(request),
+		headers: {
+			"Content-type": "request/json; charset=UTF-8"
+		}
+	});
+
+	httpresponse.then(response => {
+		if(response.status==200){
+			loanStatus = "SUBMITTED"
+            correct = true;
+		}else{
+			alert("Please try again - Could not submit request");
+            console.log("Failure"); 
+		}
+	}) 
+}
+
+async function submitAppJob(){
+    correct = false;
+    let vals = null
+
+    const positionApp = document.getElementById("job").value;
+    const jobStatus = document.getElementById("jobStatus").innerHTML 
+
+    console.log("Working")
+
+    const url = `http://127.0.0.1:5000/request`;
+
+    const request = {
+        'userId': userID,
+        'positionApp': positionApp,
+        'jobStatus': jobStatus
+	}
+
+	console.log(request)
+
+	const httpresponse = fetch(url, {
+		method: 'POST',
+		body: JSON.stringify(request),
+		headers: {
+			"Content-type": "request/json; charset=UTF-8"
+		}
+	});
+
+	httpresponse.then(response => {
+		if(response.status==200){
+			jobStatus = "SUBMITTED"
+            correct = true;
+		}else{
+			alert("Please try again - Could not submit request");
+            console.log("Failure"); 
+		}
+	}) 
     }
 </script>
 </html>
