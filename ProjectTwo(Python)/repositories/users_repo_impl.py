@@ -1,19 +1,21 @@
-from modules.users import Users
-from repositories.users import UserRepo
+from models.users import Users
+from repositories.user_repo import UserRepo
 from exceptions.resource_not_found import ResourceNotFound
 from util.db_connection import connection
 
 
 def _build_user(record):
-    return User(user_id=record[0], first_name=record[1], last_name=record[2], email=record[3], phone=record[4])
+    return Users(user_id=record[0], first_name=record[1], last_name=record[2], email=record[3], phone=record[4],
+                 username=record[5], passcode=record[6])
 
 
 class UserRepoImpl(UserRepo):
 
     def create_user(self, user):
-        sql = "INSERT INTO Users VALUES (DEFAULT, %s, %s, %s, %s) RETURNING *"
+        sql = "INSERT INTO Users VALUES (DEFAULT, %s, %s, %s, %s, %s, %s) RETURNING *"
         cursor = connection.cursor()
-        cursor.execute(sql, [user.user_id, user.first_name, user.last_name, user.email, user.phone])
+        cursor.execute(sql, [user.user_id, user.first_name, user.last_name, user.email, user.phone, user.username,
+                             user.passcode])
         connection.commit()
         record = cursor.fetchone()
         return _build_user(record)
@@ -38,9 +40,11 @@ class UserRepoImpl(UserRepo):
         return user_list
 
     def update_user(self, change):
-        sql = "UPDATE Users SET firstname = %s, lastname = %s, email = %s, phone = %s RETURNING *"
+        sql = "UPDATE Users SET firstname = %s, lastname = %s, email = %s, phone = %s, username = %s," \
+              "passcode = %s RETURNING *"
         cursor = connection.cursor()
-        cursor.execute(sql, [change.first_name, change.last_name, change.email, change.phone])
+        cursor.execute(sql, [change.first_name, change.last_name, change.email, change.phone,
+                             change.username, change.passcode])
         connection.commit()
         record = cursor.fetchone()
         return _build_user(record)

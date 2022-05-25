@@ -13,7 +13,8 @@ def route(app):
     @app.route("/user", methods=['POST'])  # creates user
     def post_user():
         body = request.json
-        user = Users(first_name=body["fistName"], last_name=body["lastName"], email=body["email"], phone=body["phone"])
+        user = Users(first_name=body["fistName"], last_name=body["lastName"], email=body["email"],
+                     phone=body["phone"], username=body["username"], passcode=body["passcode"])
         user = us.create_user(user)
         return user.json(), 201
 
@@ -37,7 +38,7 @@ def route(app):
     def put_user(user_id):
         body = request.json
         user = Users(user_id=user_id, first_name=body["fistName"], last_name=body["lastName"], email=body["email"],
-                     phone=body["phone"])
+                     phone=body["phone"], username=body["username"], passcode=body["passcode"])
         user = us.update_user(user)
         try:
             return user.json(), 201

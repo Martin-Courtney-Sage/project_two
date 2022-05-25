@@ -1,4 +1,3 @@
-# Connect to the Database Here
 import psycopg2
 from psycopg2._psycopg import OperationalError
 
@@ -6,11 +5,11 @@ from psycopg2._psycopg import OperationalError
 def create_connection():
     try:
         conn = psycopg2.connect(
-            database='BankApp',
-            user='postgres',
-            password='LLsqHYIKm3XQtgg8BHnU',
-            host='database-1.ckrrfvvcodwp.us-east-1.rds.amazonaws.com',
-            port='5432'
+            database='BankApp',  # place the database name here that you wish to connect too
+            user='postgres',  # place your main server username here
+            password='Passcode1234',  # place your main server password here
+            host='bankapi.cm3eifypc0db.us-east-1.rds.amazonaws.com',  # put the server endpoint line here
+            port='5432'  # put the port number here
         )
 
         return conn
@@ -20,7 +19,6 @@ def create_connection():
 
 
 connection = create_connection()
-
 
 def _test():
     print(connection)
