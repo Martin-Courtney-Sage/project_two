@@ -102,12 +102,12 @@
             "passcode": passwordVal
         }
 
-        const url = `http://127.0.0.1:5000/user`;
+        const url = `http://127.0.0.1:5000/registerme`;
 
         const httpResponse = await fetch(url, {
             method: "POST",
             headers: {
-                'Content-Type': 'users/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(user)
         });
@@ -115,8 +115,21 @@
         const body = await httpResponse.json();
 
         console.log(body);
-        if (body) {
+        if (body.message==null) {
             alert("User Successfully Added!")
+		
+		// Successful registration automaically logs in the user.
+		sessionStorage.setItem("userID", body.userID);
+        	sessionStorage.setItem("firstName", body.firstName);
+       	 	sessionStorage.setItem("lastName", body.lastName);
+        	sessionStorage.setItem("username", body.username);
+		sessionStorage.setItem("email", body.email);
+		sessionStorage.setItem("phone", body.phone);
+        	sessionStorage.setItem("passcode", body.passcode);
+		sessionStorage.setItem("permID", body.permID);
+		sessionStorage.setItem("generalUser", body.generalUser);
+		sessionStorage.setItem("adminPerm", body.adminPerm);
+		window.location = "https://www.wikipedia.org" // Change to User profile page!
         } else {
             alert("Failed to add User")
         } 
