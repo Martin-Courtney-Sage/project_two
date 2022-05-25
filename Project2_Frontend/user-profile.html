@@ -21,9 +21,7 @@
     </div>
 	<!--end of navigation top-->
 
-	<div id="mainbody">
-		<h1>Welcome to Your User Profile</h1>
-	</div>
+	<h1 id="mainbody"></h1>
 
 	<!--side navigation-->
 	<div id="mySidenav" class="sidenav">
@@ -31,8 +29,63 @@
 		<a id="request-page" href="request-page.html">Make a Request (Credit, Loan, Job)</a>
 	</div>
 	<!--end of side navigation-->
+
+	<table>
+		<tbody id="userProfile">
+
+		</tbody>
+	</table>
     
 </body>
+<script>
+window.onload = getUser();
+let name = sessionStorage.getItem('first_name');
+document.getElementById("mainbody").innerHTML = "Welcome" + " " + name + ", to your profile"
+
+async function getUser() {
+    console.log("Getting Accounts")
+    const httpResponse = await fetch("http://127.0.0.1:5000/account/<userid>")
+    console.log(httpResponse)
+
+    const body = await httpResponse.json()
+    
+    let result = []
+    for(var i in body){
+        result.push(body[i])
+    }
+
+    function drawTable(tbody) {
+        var tbody = document.getElementById("userProfile");
+        var accounts = new Array();
+        accounts[0] = {acct_id: null, user_id: null, account_type: null, account_balance: null};
+        var headerNames = Object.getOwnPropertyNames(accounts[0]);
+        var columnCount = headerNames.length;
+        var row = tbody.insertRow(-1);
+        for (var i = 0; i < columnCount; i++) {
+            var headerCell = document.createElement("TH");
+            headerCell.innerHTML = headerNames[i];
+            row.appendChild(headerCell);
+        }
+        
+        var tr, td;
+    
+    for (var i = 0; i < result.length; i++) {
+        tr = tbody.insertRow(tbody.rows.length);
+        td = tr.insertCell(tr.cells.length);
+        td.setAttribute("align", "center");
+
+        td.innerHTML = result[i].acct_id;
+        td = tr.insertCell(tr.cells.length);
+        td.innerHTML = result[i].user_id;
+        td = tr.insertCell(tr.cells.length);
+        td.innerHTML = result[i].account_type;
+        td = tr.insertCell(tr.cells.length);
+        td.innerHTML = result[i].account_balance;
+    }
+}
+    drawTable("userProfile");
+}
+</script>
 <!--JS file for navigation top-->
 <script src="navigation-top.js"></script>
 </html>
