@@ -1,7 +1,7 @@
 Feature: Customer Service Bot
 
-  Scenario: Users and Managers can access the Customer Service Bot throughout the application
-    Given The Users and Managers are on any page in the application
+  Scenario: Users and Managers can access the Customer Service Bot on Customer Center Page
+    Given The Users and Managers are on Customer Center Page
     When The Customer Service Bot button is selected
     Then The chat box will show, and interaction with the bot can occur
 
