@@ -104,10 +104,10 @@ public class LoginController {
                 }
                 context.result(gson.toJson(sl));
             } else {
-                context.result("message:Invalid Login!");
+                context.result("\"message\":\"Invalid Login!\"");
             }
         }else{
-            context.result("message:Invalid Login!");
+            context.result("\"message\":\"Invalid Login!\"");
         }
     };
 

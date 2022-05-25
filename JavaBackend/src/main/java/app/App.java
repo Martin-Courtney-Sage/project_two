@@ -2,6 +2,7 @@ package app;
 
 import controllers.LoginController;
 import controllers.PermissionsController;
+import controllers.RegistrationController;
 import controllers.UsersController;
 import io.javalin.Javalin;
 import repositories.*;
@@ -36,6 +37,8 @@ public class App {
         LoginRepo lr = new LoginRepoImpl();
         LoginService ls = new LoginServiceImpl(lr);
         LoginController lc = new LoginController(ls, ps, us);
+
+        RegistrationController rc = new RegistrationController(ls, ps, us);
 
         app.get("/hello", (context) -> context.result("Hello World!"));
         app.get("/hello2", new HelloHandler());
@@ -78,6 +81,12 @@ public class App {
             path("logmein", () -> {
 
                 post(lc.loginFunction);
+
+            });
+
+            path("registerme", () -> {
+
+                post(rc.registerUser);
 
             });
 
