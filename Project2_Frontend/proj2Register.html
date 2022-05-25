@@ -65,7 +65,7 @@
             <td><input type="password" id="passwordInput" /></td>
         </tr>
         <tr>
-            <td><button onclick="registerUser()"><a href="file:///C:/Users/Gabriel%20Charles/Desktop/Revature/Training/Classwork/VisualStudioCode/TuitionProject/formPage.html" target="_blank">Register</a></button></td>
+            <td><button onclick="registerUser()">Register</a></button></td>
         </tr>
     </table>
     <hr>
@@ -77,50 +77,39 @@
 
     async function registerUser() {
 
-        console.log("Adding user....")
+        console.log("Working")
 
         const firstNameVal = document.getElementById("firstNameInput").value
         const lastNameVal = document.getElementById("lastNameInput").value
         const emailVal = document.getElementById("emailInput").value
 		const phoneVal = document.getElementById("phoneInput").value
-        const userVal = document.getElementById("userNameInput").value
+        const usernameVal = document.getElementById("userNameInput").value
         const passwordVal = document.getElementById("passwordInput").value
-
-       // let availableVal = false;
-
-        // const radios = document.getElementsByName("availability");
-        // radios.forEach(radio => {
-        //     if(radio.checked) {
-        //         availableVal = radio.value
-        //     }
-        // })
-
-        //availableVal = document.querySelector('input[name="availability"]:checked').value
 
         console.log(firstNameVal)
         console.log(lastNameVal)
         console.log(emailVal)
 		console.log(phoneVal)
-        console.log(userVal)
+        console.log(usernameVal)
         console.log(passwordVal)
 
-        const data = {
-            firstName: firstNameVal,
-            lastName: lastNameVal,
-            email: emailVal,
-			phone: phoneVal
-            username: userVal,
-            passcode: passwordVal
+        const user = {
+            "first_name": firstNameVal,
+            "last_name": lastNameVal,
+            "email": emailVal,
+			"phone": phoneVal,
+            "username": usernameVal,
+            "passcode": passwordVal
         }
 
-       /* const url = "http://localhost:5000/students"
+        const url = `http://127.0.0.1:5000/user`;
 
         const httpResponse = await fetch(url, {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'users/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(user)
         });
 
         const body = await httpResponse.json();
@@ -129,68 +118,9 @@
         if (body) {
             alert("User Successfully Added!")
         } else {
-            alert("User Failed to be added.")
+            alert("Failed to add User")
         } 
-        */
     }
-
-</script>
-<!-- <script>
-
-    let age = document.getElementById("ageInput")
-    age.onkeyup = () => {
-        // console.log(age.value)
-        if (age.value < 0 || age.value == "") {
-            age.value = 0
-        }
-    }
-
-    let registerUser = function () {
-
-        let firstnameVal = document.getElementById("firstNameInput").value
-        let lastnameVal = document.getElementById("lastNameInput").value
-        let emailVal = document.getElementById("emailInput").value
-        let ageVal = document.getElementById("ageInput").value
-        let gradeVal = document.getElementById("gradeInput").value
-        let courseVal = document.getElementById("courseInput").value
-        let usernameVal = document.getElementById("userNameInput").value
-        let passwordVal = document.getElementById("passwordInput").value
-
-        console.log(firstnameVal)
-        console.log(lastnameVal)
-        console.log(emailVal)
-        console.log(ageVal)
-        console.log(gradeVal)
-        console.log(courseVal)
-        console.log(usernameVal)
-        console.log(passwordVal)
-
-        let user = {
-            firstname: firstnameVal,
-            lastname: lastnameVal,
-            email: emailVal,
-            age: ageVal,
-            grade: gradeVal,
-            course: courseVal,
-            username: usernameVal,
-            password: passwordVal,
-        }
-
-        console.log(user)
-
-        let userJSON = JSON.stringify(user)
-        console.log(userJSON)
-
-        let pretendResponse = JSON.parse(userJSON)
-
-        console.log(pretendResponse)
-
-        if (pretendResponse) {
-            alert("User Added!")
-        }
-
-    }
-</script> -->
 
 <!--JS file for navigation top-->
 <script src="navigation-top.js"></script>
