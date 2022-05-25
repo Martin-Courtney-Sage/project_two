@@ -5,17 +5,15 @@ from util.db_connection import connection
 
 
 def _build_user(record):
-    return Users(user_id=record[0], first_name=record[1], last_name=record[2], email=record[3], phone=record[4],
-                 username=record[5], passcode=record[6])
+    return Users(user_id=record[0], first_name=record[1], last_name=record[2], email=record[3], phone=record[4])
 
 
 class UserRepoImpl(UserRepo):
 
     def create_user(self, user):
-        sql = "INSERT INTO Users VALUES (DEFAULT, %s, %s, %s, %s, %s, %s) RETURNING *"
+        sql = "INSERT INTO Users VALUES (DEFAULT, %s, %s, %s, %s) RETURNING *"
         cursor = connection.cursor()
-        cursor.execute(sql, [user.user_id, user.first_name, user.last_name, user.email, user.phone, user.username,
-                             user.passcode])
+        cursor.execute(sql, [user.user_id, user.first_name, user.last_name, user.email, user.phone])
         connection.commit()
         record = cursor.fetchone()
         return _build_user(record)
@@ -40,11 +38,9 @@ class UserRepoImpl(UserRepo):
         return user_list
 
     def update_user(self, change):
-        sql = "UPDATE Users SET firstname = %s, lastname = %s, email = %s, phone = %s, username = %s," \
-              "passcode = %s RETURNING *"
+        sql = "UPDATE Users SET firstname = %s, lastname = %s, email = %s, phone = %s RETURNING *"
         cursor = connection.cursor()
-        cursor.execute(sql, [change.first_name, change.last_name, change.email, change.phone,
-                             change.username, change.passcode])
+        cursor.execute(sql, [change.first_name, change.last_name, change.email, change.phone])
         connection.commit()
         record = cursor.fetchone()
         return _build_user(record)
@@ -55,3 +51,13 @@ class UserRepoImpl(UserRepo):
         cursor.execute(sql, [user_id])
         connection.commit()
         return f"User ID: {user_id} - Deleted"
+
+
+def _test():
+    ur = UserRepoImpl()
+
+    print(ur.get_user(1))
+
+
+if __name__ == '__main__':
+    _test()
