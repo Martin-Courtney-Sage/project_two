@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Register Page</title>
+    <!--navigation top style sheet-->
+	<link rel="stylesheet" href="navigation-top.css">
+
+    <style>
+        .header {
+            text-align: right
+        }
+
+        #myTable th,
+        #myTable td {
+            border: 1px solid black;
+            width: 33%;
+        }
+    </style>
+     <h1>
+        <p style="text-align:center;">Revature Bank</p>
+     </h1>
+</head>
+
+<body style="background-color:rgb(141, 140, 140);">
+    <!--navigation top-->
+	<div class="topnav" id="myTopnav">
+		<a id="home-page" class="glossymenu" href="bankWelcomePage.html"> WELCOME :::</a>
+        <a id="profile-page" class="glossymenu" href="user-profile.html">::: USER PROFILE :::</a>
+		<a id="loan-page" class="glossymenu" href="proj2Login.html"> ::: AUTO LOAN :::</a>
+		<a id="credit-page" class="glossymenu" href="http://1"> ::: CREDIT CARD :::</a>
+		<a id="about-page" class="glossymenu" href="#"onClick="window.open('http://','WindowA','width=400,height=600,scrullbars=no');">::: ABOUT US :::</a>
+		<a id="investor-page" class="glossymenu" href="http://w">::: INVESTOR :::</a>
+		<a id="special-offer-page" class="glossymenu" href="http://www.">::: OUR SPECIAL OFFER :::</a>
+  		<a id="login-page" class="glossymenu" href="proj2Login.html">::: LOGIN / SIGNUP</a></div>
+    </div>
+	<!--end of navigation top-->
+	<br>
+    <br>	
+    <p style="text-align:left;">Please fill out your information <br>
+        to be able to logging and register.</p>
+    <table>
+        <tr>
+            <td class="header"><label for="firstNameInput">First Name:</label></td>
+            <td><input type="text" id="firstNameInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="lastNameInput">Last Name:</label></td>
+            <td><input type="text" id="lastNameInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="emailInput">Email:</label></td>
+            <td><input type="email" id="emailInput" /></td>
+        </tr>
+		<tr>
+            <td class="header"><label for="phoneInput">Phone:</label></td>
+            <td><input type="text" id="phoneInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="userNameInput">Create Username:</label></td>
+            <td><input type="text" id="userNameInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="passwordInput">Create Password:</label></td>
+            <td><input type="password" id="passwordInput" /></td>
+        </tr>
+        <tr>
+            <td><button onclick="registerUser()">Register</a></button></td>
+        </tr>
+    </table>
+    <hr>
+    <br>
+    
+
+</body>
+<script>
+
+    async function registerUser() {
+
+        console.log("Working")
+
+        const firstNameVal = document.getElementById("firstNameInput").value
+        const lastNameVal = document.getElementById("lastNameInput").value
+        const emailVal = document.getElementById("emailInput").value
+		const phoneVal = document.getElementById("phoneInput").value
+        const usernameVal = document.getElementById("userNameInput").value
+        const passwordVal = document.getElementById("passwordInput").value
+
+        console.log(firstNameVal)
+        console.log(lastNameVal)
+        console.log(emailVal)
+		console.log(phoneVal)
+        console.log(usernameVal)
+        console.log(passwordVal)
+
+        const user = {
+            "first_name": firstNameVal,
+            "last_name": lastNameVal,
+            "email": emailVal,
+			"phone": phoneVal,
+            "username": usernameVal,
+            "passcode": passwordVal
+        }
+
+        const url = `http://127.0.0.1:5000/user`;
+
+        const httpResponse = await fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'users/json'
+            },
+            body: JSON.stringify(user)
+        });
+
+        const body = await httpResponse.json();
+
+        console.log(body);
+        if (body) {
+            alert("User Successfully Added!")
+        } else {
+            alert("Failed to add User")
+        } 
+    }
+
+<!--JS file for navigation top-->
+<script src="navigation-top.js"></script>
+</html>
