@@ -9,23 +9,23 @@ class Users:
         self.passcode = passcode
 
     def __repr__(self):
-        return str ({
-            'user_id' : self.user_id,
-            'first_name' : self.first_name,
-            'last_name' : self.last_name,
-            'email' : self.email,
-            'phone' : self.phone,
-            'username' : self.username,
-            'passcode' : self.passcode
+        return str({
+            'user_id': self.user_id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email,
+            'phone': self.phone,
+            'username': self.username,
+            'passcode': self.passcode
         })
 
     def json(self):
-        return str ({
-            'userId' : self.user_id,
-            'firstName' : self.first_name,
-            'lastName' : self.last_name,
-            'email' : self.email,
-            'phone' : self.phone,
+        return str({
+            'userId': self.user_id,
+            'firstName': self.first_name,
+            'lastName': self.last_name,
+            'email': self.email,
+            'phone': self.phone,
             'username': self.username,
             'passcode': self.passcode
         })

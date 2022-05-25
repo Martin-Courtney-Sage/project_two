@@ -1,5 +1,5 @@
-from repositories.account_repo_impl import AcctRepoImpl
-from repositories.users_repo_impl import UserRepoImpl
+from repositories.account_repo_impl import AcctRepoImpl as accounts
+from repositories.users_repo_impl import UserRepoImpl as users
 import unittest
 
 

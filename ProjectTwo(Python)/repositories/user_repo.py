@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class UserRepo(ABC):
     @abstractmethod
     def create_user(self, user):
