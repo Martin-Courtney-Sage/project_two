@@ -1,7 +1,7 @@
-from repositories.account_repo_impl import AcctRepoImpl as account
-from repositories.users_repo_impl import UserRepoImpl as user
-
+from repositories.account_repo_impl import AcctRepoImpl
+from repositories.users_repo_impl import UserRepoImpl
 import unittest
+
 
 # Testing User Functions
 class TestUser(unittest.TestCase):
@@ -24,6 +24,7 @@ class TestUser(unittest.TestCase):
     def test_delete_user(self):
         print("testing delete user")
         print("test success")
+
 
 # Testing Account Functions
 class TestAccount(unittest.TestCase):
@@ -58,6 +59,7 @@ class TestAccount(unittest.TestCase):
     def test_transfer_success(self):
         print("testing transfer funds")
         print("test success")
+
 
 # Testing Requests Functions
 class TestRequests(unittest.TestCase):
