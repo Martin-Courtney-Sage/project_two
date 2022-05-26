@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f688f3ff-e6ec-4ff9-8aa0-d39c772d8ea5" name="Changes" comment="updating some unit tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/users.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repositories/account_repo_impl.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/account_repo_impl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing_things/impl_tester.py" beforeDir="false" afterPath="$PROJECT_DIR$/testing_things/impl_tester.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,50 +42,36 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../2203-python-java-with-automation-reston/PythonBasics" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Project 1/TRMS" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for impl_tester.TestUser.test_get_user">
-    <configuration name="environment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Python tests in impl_tester.py">
+    <configuration name="Python tests for impl_tester.TestExceptions.test_funds_not_available" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="ProjectTwo(Python)" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/features" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testing_things" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/features/environment.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;impl_tester.TestExceptions.test_funds_not_available&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="users_repo_impl" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for impl_tester.TestExceptions.test_resource_not_found" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="ProjectTwo(Python)" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/repositories" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/testing_things" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/repositories/users_repo_impl.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;impl_tester.TestExceptions.test_resource_not_found&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="Python tests for impl_tester.TestUser" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
@@ -113,7 +102,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for impl_tester.TestUser.test_get_user" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests in impl_tester.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="ProjectTwo(Python)" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -123,17 +112,17 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;impl_tester.TestUser.test_get_user&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/testing_things/impl_tester.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for impl_tester.TestUser.test_get_user" />
-        <item itemvalue="Python.users_repo_impl" />
-        <item itemvalue="Python tests.Python tests for impl_tester.TestUser.test_get_all_users" />
+        <item itemvalue="Python tests.Python tests in impl_tester.py" />
+        <item itemvalue="Python tests.Python tests for impl_tester.TestExceptions.test_resource_not_found" />
+        <item itemvalue="Python tests.Python tests for impl_tester.TestExceptions.test_funds_not_available" />
         <item itemvalue="Python tests.Python tests for impl_tester.TestUser" />
-        <item itemvalue="Python.environment" />
+        <item itemvalue="Python tests.Python tests for impl_tester.TestUser.test_get_all_users" />
       </list>
     </recent_temporary>
   </component>

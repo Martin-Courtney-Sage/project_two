@@ -7,6 +7,7 @@ from util.db_connection import connection
 def _build_account(record):
     return Accounts(acct_id=record[0], user_id=record[1], account_type=record[2], account_balance=record[3])
 
+
 class AcctRepoImpl(AccountRepo):
     def create_account(self, account):
         sql = 'INSERT INTO Accounts VALUES (DEFAULT, %s, %s, %s) RETURN *'
@@ -17,7 +18,7 @@ class AcctRepoImpl(AccountRepo):
         return _build_account(record)
 
     def get_account(self, acct_id):
-        sql = "SELECT * FROM Accounts WHERE acctID = %s"
+        sql = 'SELECT * FROM Accounts WHERE acctID = %s'
         cursor = connection.cursor()
         cursor.execute(sql, [acct_id])
         record = cursor.fetchone()
@@ -52,25 +53,11 @@ class AcctRepoImpl(AccountRepo):
         connection.commit()
         return f"{acct_id} successfully deleted"
 
-    def withdraw_funds(self, acct_id):
-        sql = "UPDATE Accounts WHERE acctID = %s SET accountBalance = account.account_balance"
-        cursor = connection.cursor()
-        cursor.execute(sql, [acct_id])
-        connection.commit()
-        return f"{acct_id} -- withdrew funds successfully"
 
-    def deposit_funds(self, acct_id):
-        sql = "UPDATE Accounts WHERE acctID = %s SET accountBalance = account.account_balance"
-        cursor = connection.cursor()
-        cursor.execute(sql, [acct_id])
-        connection.commit()
-        return f"Funds deposited successfully into -- {acct_id}"
+def _test():
+    ar = AcctRepoImpl()
+    print(ar.get_account(1))
 
 
-    def transfer_funds(self, acct_id_from, acct_id_too):
-        sql = "UPDATE Accounts WHERE acctID = acct_id_from SET accountBalance = account1 " \
-              "UPDATE Accounts WHERE acctID = acct_id_too SET accountBalance = account2"
-        cursor = connection.cursor()
-        cursor.execute(sql, [acct_id_from, acct_id_too])
-        connection.commit()
-        return f"Funds successfully transferred between - {acct_id_too} and {acct_id_from}"
+if __name__ == '__main__':
+    _test()

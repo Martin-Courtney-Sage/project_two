@@ -15,6 +15,12 @@ class Users:
             'phone': self.phone
         })
 
+    def __eq__(self, other):
+        if other == None:
+            return False
+        else:
+            return self.__dict__ == other.__dict__
+
     def json(self):
         return str({
             'userId': self.user_id,
