@@ -1,6 +1,7 @@
 .topnav{
     background-color:#c95959;
     overflow: hidden;
+    padding-left: 28%;
 }
 
 .topnav a{
