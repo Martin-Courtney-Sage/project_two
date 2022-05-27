@@ -1,5 +1,5 @@
-import psycopg2
-from psycopg2._psycopg import OperationalError
+import psycopg2 as psycopg2
+from psycopg2 import OperationalError
 
 
 def create_connection():
