@@ -1,5 +1,5 @@
 var questionNum = 0;                            // keep count of question, used for IF condition.
-var question = "<p> Hi welcome! How can I help you?</p>";	// first question
+var question = "<p> Hi welcome!</p>";	// first question
 
 var output = document.getElementById('output');	// store id="output" in output variable
 output.innerHTML = "<h4>" + question + "</h4>"; 
@@ -14,11 +14,6 @@ function bot() {
 	div.innerHTML = " " + document.getElementById("usermsg").value;
     document.getElementById('input').appendChild(div); // output response
 
-	// create an array of tasks to complete and navigate
-	// cycle through the array to see if the input the user submitted is in there
-	// clarify if that is what they want
-	// proceed with task
-
 	if (questionNum == 0) {
 		var div = document.createElement('div');
         var questionOne = "How can I help you today?";
@@ -31,32 +26,27 @@ function bot() {
 
         document.getElementById('output').appendChild(div); // output response 
 		document.getElementById("usermsg").value = ""; // clear text box
-
-	} else if (questionNum == 1 && (['account', 'accounts', 'request', 'credit request', 'loan request', 'job request', 'withdrawal',
-			   'deposit', 'transfer', 'help', 'login', 'home', 'user', 'change',]).indexOf(answer) >= 0) {
+	} 
+	
+	if (questionNum == 1 && (['account', 'accounts',].indexOf(answer) >= 0)) {
 		var div = document.createElement('div');
        
         div.className = 'row';
 
-        div.innerHTML = "<p> So you are looking to " + answer + ", right?</p>";
-
-        document.getElementById('output').appendChild(div); // output response 
+        div.innerHTML = "<p> So you are looking for " + answer + ", right?</p>";
+		document.getElementById('output').appendChild(div); // output response 
 		document.getElementById("usermsg").value = ""; // clear text box
-	}
+		questionNum = 2
+	} else if (questionNum == 2 && (['yes', 'yup', 'yeah', 'y', 'correct', 'right',].indexOf(answer) >= 0)){
+			var div = document.createElement('div');
+			question = "Let me help you navigate there: ";
+			div.className = 'row';
 
-	if (questionNum == 2 && (['yes', 'yup', 'yeah', 'y', 'correct', 'right',].indexOf(answer) >= 0)) {
-		var div = document.createElement('div');
-		question = "Great! Let me help you navigate there: ";
-
-		// links and window.location changes
-
-        div.className = 'row';
-
-        div.innerHTML = "<p>" + question + "https:///www.google.com" + "</p>";
-
-        document.getElementById('output').appendChild(div); // output response 
-		document.getElementById("usermsg").value = ""; // clear text box
-	} else if (questionNum == 2 && (['no', 'nope', 'nah', 'n', 'incorrect', 'wrong',].indexOf(answer) >= 0)) {
+			div.innerHTML = "<p> "+ question + "<a href='user-profile.html'>please check out Account page</a>" + "</p>";
+	
+			document.getElementById('output').appendChild(div); // output response 
+			document.getElementById("usermsg").value = ""; // clear text box
+	} else  if (questionNum == 2 && (['no', 'nope', 'nah', 'n', 'incorrect', 'wrong',].indexOf(answer) >= 0)){
 		var div = document.createElement('div');
 
         div.className = 'row';
@@ -65,16 +55,95 @@ function bot() {
 
         document.getElementById('output').appendChild(div); // output response 
 		document.getElementById("usermsg").value = ""; // clear text box
-	} else if (questionNum == 4) {
-		var div = document.createElement('div');
-		question = "Question five";
+	} 
 
-        div.innerHTML = "<h2>thanks for chatting!</h2>";
+	if (questionNum == 1 && (['deposit', 'withdraw', 'withdrawal', 'transfer', 'funds', 'balance',].indexOf(answer) >= 0)) {
+		var div = document.createElement('div');
+       
+        div.className = 'row';
+
+        div.innerHTML = "<p> So you are looking for " + answer + ", right?</p>";
+		document.getElementById('output').appendChild(div); // output response 
+		document.getElementById("usermsg").value = ""; // clear text box
+		questionNum = 3
+	} else if (questionNum == 3 && (['yes', 'yup', 'yeah', 'y', 'correct', 'right',].indexOf(answer) >= 0)){
+			var div = document.createElement('div');
+			question = "Let me help you navigate there: ";
+			div.className = 'row';
+
+			div.innerHTML = "<p> "+ question + "<a href='user-profile.html'>That can be done in your Profile page</a>" + "</p>";
+	
+			document.getElementById('output').appendChild(div); // output response 
+			document.getElementById("usermsg").value = ""; // clear text box
+	} else  if (questionNum == 3 && (['no', 'nope', 'nah', 'n', 'incorrect', 'wrong',].indexOf(answer) >= 0)){
+		var div = document.createElement('div');
+
+        div.className = 'row';
+
+        div.innerHTML = "<p> so, what were you looking to do...?</p>";
 
         document.getElementById('output').appendChild(div); // output response 
 		document.getElementById("usermsg").value = ""; // clear text box
 	}
+
+	if (questionNum == 1 && (['request', 'credit', 'job', 'loan', 'requests', 'credit request', 'job request', 'loan request'].indexOf(answer) >= 0)) {
+		var div = document.createElement('div');
+       
+        div.className = 'row';
+
+        div.innerHTML = "<p> So you are looking for " + answer + ", right?</p>";
+		document.getElementById('output').appendChild(div); // output response 
+		document.getElementById("usermsg").value = ""; // clear text box
+		questionNum = 4
+	} else if (questionNum == 4 && (['yes', 'yup', 'yeah', 'y', 'correct', 'right',].indexOf(answer) >= 0)){
+			var div = document.createElement('div');
+			question = "Let me help you navigate there: ";
+			div.className = 'row';
+
+			div.innerHTML = "<p> "+ question + "<a href='request-page.html'>please check out Request page</a>" + "</p>";
+	
+			document.getElementById('output').appendChild(div); // output response 
+			document.getElementById("usermsg").value = ""; // clear text box
+	} else  if (questionNum == 4 && (['no', 'nope', 'nah', 'n', 'incorrect', 'wrong',].indexOf(answer) >= 0)){
+		var div = document.createElement('div');
+
+        div.className = 'row';
+
+        div.innerHTML = "<p> so, what were you looking to do...?</p>";
+
+        document.getElementById('output').appendChild(div); // output response 
+		document.getElementById("usermsg").value = ""; // clear text box
+	}
+
+	if (questionNum == 1 && (['help', 'login', 'home', 'user',].indexOf(answer) >= 0)) {
+		var div = document.createElement('div');
+       
+        div.className = 'row';
+
+        div.innerHTML = "<p> So you are looking for " + answer + ", right?</p>";
+		document.getElementById('output').appendChild(div); // output response 
+		document.getElementById("usermsg").value = ""; // clear text box
+		questionNum = 5
+	} else if (questionNum == 5 && (['yes', 'yup', 'yeah', 'y', 'correct', 'right',].indexOf(answer) >= 0)){
+			var div = document.createElement('div');
+			question = "Let me help you navigate there: ";
+			div.className = 'row';
+
+			div.innerHTML = "<p> "+ question + "<a href='help.html'>please check out the Help page</a>" + "</p>";
+	
+			document.getElementById('output').appendChild(div); // output response 
+			document.getElementById("usermsg").value = ""; // clear text box
+	} else  if (questionNum == 5 && (['no', 'nope', 'nah', 'n', 'incorrect', 'wrong',].indexOf(answer) >= 0)){
+		var div = document.createElement('div');
+
+        div.className = 'row';
+
+        div.innerHTML = "<p> so, what were you looking to do...?</p>";
+
+        document.getElementById('output').appendChild(div); // output response 
+		document.getElementById("usermsg").value = ""; // clear text box
+	}
+
 }
 
-// figure out on click of send button -- right now its just when key enter is pressed
-
+// press enter to submit in pure javascript
