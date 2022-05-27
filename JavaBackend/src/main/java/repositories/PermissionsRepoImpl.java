@@ -86,7 +86,7 @@ public class PermissionsRepoImpl implements PermissionsRepo {
 
     @Override
     public Permissions addPermission(Permissions p) {
-        String sql = "INSERT INTO login VALUES (DEFAULT,?,?,?) RETURNING *";
+        String sql = "INSERT INTO permissions VALUES (DEFAULT,?,?,?) RETURNING *";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -174,8 +174,8 @@ public class PermissionsRepoImpl implements PermissionsRepo {
 
     private Permissions buildPermission(ResultSet rs) throws SQLException {
         Permissions p = new Permissions();
-        p.setPermID(rs.getInt("permid"));
-        p.setLoginID(rs.getInt("loginid"));
+        p.setPermID(rs.getInt("permID"));
+        p.setLoginID(rs.getInt("loginID"));
         p.setAdminPerm(rs.getString("adminperm"));
         p.setGeneralUser(rs.getString("generaluser"));
 

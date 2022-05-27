@@ -45,6 +45,6 @@ public class PermissionsServiceImpl implements PermissionsService{
 
     @Override
     public Permissions deletePermissionByLoginID(int id) {
-        return deletePermissionByLoginID(id);
+        return pr.deletePermissionByLoginID(id);
     }
 }

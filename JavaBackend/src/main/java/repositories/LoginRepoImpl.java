@@ -21,7 +21,7 @@ public class LoginRepoImpl implements LoginRepo{
 
     @Override
     public Login getLogin(int id) {
-        String sql = "SELECT * FROM login WHERE loginid = ?";
+        String sql = "SELECT * FROM login WHERE loginID = ?";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -41,7 +41,7 @@ public class LoginRepoImpl implements LoginRepo{
 
     @Override
     public Login getLoginByUserID(int userID) {
-        String sql = "SELECT * FROM login WHERE userid = ?";
+        String sql = "SELECT * FROM login WHERE userID = ?";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -130,12 +130,12 @@ public class LoginRepoImpl implements LoginRepo{
     @Override
     public Login updateLogin(Login change) {
         try {
-            String sql = "UPDATE users SET username=?, passcode=? WHERE loginid = ? RETURNING *";
+            String sql = "UPDATE login SET username=?, passcode=? WHERE loginID = ? RETURNING *";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setString(1, change.getUsername());
             ps.setString(2, change.getPasscode());
-
+            ps.setInt(3, change.getLoginID());
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -153,11 +153,12 @@ public class LoginRepoImpl implements LoginRepo{
     @Override
     public Login updateLoginByUserID(Login change) {
         try {
-            String sql = "UPDATE users SET username=?, passcode=? WHERE userid = ? RETURNING *";
+            String sql = "UPDATE login SET username=?, passcode=? WHERE userID = ? RETURNING *";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setString(1, change.getUsername());
             ps.setString(2, change.getPasscode());
+            ps.setInt(3, change.getUserID());
 
             ResultSet rs = ps.executeQuery();
 
@@ -176,7 +177,7 @@ public class LoginRepoImpl implements LoginRepo{
     @Override
     public Login deleteLogin(int id) {
         try {
-            String sql = "DELETE FROM users WHERE loginid = ? RETURNING *";
+            String sql = "DELETE FROM login WHERE loginID = ? RETURNING *";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setInt(1, id);
@@ -196,7 +197,7 @@ public class LoginRepoImpl implements LoginRepo{
     @Override
     public Login deleteLoginByUserID(int id) {
         try {
-            String sql = "DELETE FROM users WHERE userid = ? RETURNING *";
+            String sql = "DELETE FROM login WHERE userID = ? RETURNING *";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setInt(1, id);

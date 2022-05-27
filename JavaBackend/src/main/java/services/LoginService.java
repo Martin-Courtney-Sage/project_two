@@ -18,11 +18,11 @@ public interface LoginService {
 
     public Login updateLogin(Login change);
 
-    Login updateLoginByUserID(Login change);
+    public Login updateLoginByUserID(Login change);
 
     public Login deleteLogin(int id);
 
-    Login deleteLoginByUserID(int id);
+    public Login deleteLoginByUserID(int id);
 
 
 }

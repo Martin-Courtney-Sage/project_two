@@ -79,15 +79,11 @@ public class App {
             });
 
             path("logmein", () -> {
-
                 post(lc.loginFunction);
-
             });
 
             path("registerme", () -> {
-
                 post(rc.registerUser);
-
             });
 
 
