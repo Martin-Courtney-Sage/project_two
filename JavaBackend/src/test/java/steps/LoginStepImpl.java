@@ -73,6 +73,7 @@ public class LoginStepImpl {
 
     @Then("^The User is provided with alert\\.$")
     public void the_User_is_provided_with_alert() throws Throwable {
+        Thread.sleep(2000);
         driver.switchTo().alert().dismiss();
     }
 
