@@ -140,22 +140,28 @@
 
 	if(body.message == null) {
 		sessionStorage.setItem("userID", body.userID);
-        	sessionStorage.setItem("firstName", body.firstName);
-       	 	sessionStorage.setItem("lastName", body.lastName);
-        	sessionStorage.setItem("username", body.username);
+        sessionStorage.setItem("firstName", body.firstName);
+       	sessionStorage.setItem("lastName", body.lastName);
+        sessionStorage.setItem("username", body.username);
 		sessionStorage.setItem("email", body.email);
 		sessionStorage.setItem("phone", body.phone);
-        	sessionStorage.setItem("passcode", body.passcode);
+        sessionStorage.setItem("passcode", body.passcode);
 		sessionStorage.setItem("permID", body.permID);
-		sessionStorage.setItem("generalUser", body.generalUser);
-		sessionStorage.setItem("adminPerm", body.adminPerm);
 	} 
-
-	if(body.adminPerm != null) {
-		window.location = "./admin-profile.html"
-	} else if (body.generalUser != null) {
-		window.location = "./user-profile.html"
-	} else {
+	
+	if(body.message == null){
+		if(body.userID != null && body.userID == "1") {
+			window.location = "./user-profile.html"     // Admin
+            sessionStorage.setItem("adminPerm", "adminPerm");
+		} else if (body.userID != null && parseInt(body.userID) > 1) {
+			window.location = "./user-profile.html"     // General User
+            sessionStorage.setItem("generalUser", "generalUser");
+		} else {
+			alert("Please try again - Log in failure");
+			console.log("failure")
+		}
+	}
+	else{
 		alert("Please try again - Log in failure");
 		console.log("failure")
 	}
@@ -164,10 +170,6 @@
 
 </script>
 </body>
-<<<<<<< HEAD
 <!--JS file for navigation top-->
 <script src="navigation-top.js"></script>
 </html>
-=======
-</html>
->>>>>>> 10cb1bed93e85d2fc47c20258e9b92ebac32dde5

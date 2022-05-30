@@ -38,12 +38,12 @@
 </body>
 <script>
 window.onload = getUser();
-let name = sessionStorage.getItem('first_name');
+let name = sessionStorage.getItem('firstName');
 document.getElementById("mainbody").innerHTML = "Welcome" + " " + name + ", to your profile"
 
 async function getUser() {
     console.log("Getting Accounts")
-    const httpResponse = await fetch("http://127.0.0.1:5000/account/<userid>")
+    const httpResponse = await fetch("http://127.0.0.1:5000/account/" + sessionStorage.getItem("userID"))
     console.log(httpResponse)
 
     const body = await httpResponse.json()
