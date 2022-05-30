@@ -1,6 +1,5 @@
 package steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -18,7 +17,7 @@ public class LoginStepImpl {
     @Given("^The User is on Login Page$")
     public void the_User_is_on_Login_Page() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        driver.get("file:///C:/Users/visio/OneDrive/Documents/GitHub/project_two/Project2_Frontend/proj2Login.html");
+        driver.get("file:///C:/Users/visio/OneDrive/Documents/GitHub/project_two/Project2_Frontend/Project2_Frontend/proj2Login.html");
     }
 
     @When("^The User provides correct user details for general user role and clicks Login button$")
