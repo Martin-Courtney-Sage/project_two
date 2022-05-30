@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login Page</title>
+
+    <!--navigation top style sheet-->
+	<link rel="stylesheet" href="navigation-top.css">
+    
+            <style>  
+            body{
+                color:rgb(32, 32, 32);
+            }
+
+            #main {
+                width: 80%;
+                margin-top: -5%;
+                margin-left: 20%;
+            }
+
+            table{
+                margin: 5px;
+                padding: 5px;
+                width: 5px;
+                
+            }
+
+            .starscell{
+                border: 1px dashed blue;
+                width: 1px;
+                text-align: 50%;
+                border-collapse: collapse;
+            }
+        </style>
+</head>
+
+<body style="background-color:whitesmoke; padding-top: 1%;">
+
+		<!--navigation top-->
+		<div class="topnav" id="myTopnav">
+			<a id="home-page" class="glossymenu" href="bankWelcomePage.html"> ::: WELCOME :::</a><br>
+			<a id="about-page" class="glossymenu" href="about-page.html">::: ABOUT US :::</a><br>
+			<a id="login-page" class="glossymenu" href="proj2Login.html">::: LOGIN / SIGNUP :::</a><br>
+			<a id="service-page" class="glossymenu" href="customer-service.html">::: HELP :::</a>
+		</div>
+		<!--end of navigation top-->
+	<br>
+    <br>
+
+    <body>
+        <div id="main">
+     <h1>
+        <p style="text-align:center;">Revature Bank</p>
+        <p style="text-align:center;">2022 Project 2 </p>
+     </h1>
+      <table  style="text-align:right; float: right; " >
+        <tr>
+            <td class="header"><label for="usernameInput" style="font-size: 24px; font-weight: 400;">Username:</label></td>
+            <td><input type="text" id="usernameInput" style="padding: 5%;" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="passwordInput" style="font-size: 24px; font-weight: 400;">Password:</label></td>
+            <td><input type="password" id="passwordInput" style="padding: 5%;" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button id="loginButton" onclick="userLogin();" style="padding: 10px;">Login</button>
+                <button onclick=""style="padding: 10px;"><a href="proj2Register.html" style="text-decoration: none;">Register</a></button></td>
+        </tr>
+    </table>
+     <p style="text-align:center;">Welcome to our bank</p>
+     <div style="width: 80%; margin-left: 20%;">
+         <h2><p style="text-align:center;">Our Investors</p></h2>
+         <img src="C:\Users\Gabriel Charles\Desktop\Revature\Training\SileniumExample\investors.jpg" height="250" width=" 450" style="display: block; margin: 0 auto;"/>
+        <br>
+        <p href = "https://www.youtube.com/" target="_blank" style="text-align: center;">Click here to learn more</p>
+    </div>
+    <p style="text-align:center;">About Us.............................................................................................<br>
+     <br>We are a very reputable Bank.............................................................. <br>
+     you can contact us at 555-555-5555....................................................
+     </p>
+    <table id="bankTable" style="border: 10px solid rgb(230,230,230); text-align: center; float: right; margin: 3%">
+        <tr>
+            <th>Build</th>
+            <th>Since</th>
+            <th>November</th>
+            <th>1960</th>
+        </tr>
+        <tr>
+            <th>by</th>
+            <th>the</th>
+            <th>American</th>
+            <th>group</th>
+        </tr>
+    </table>
+
+    <p>
+        ........................................................Our page is still under construction. Please come visit our page often<br/>
+    </p>
+
+    <hr>
+    <br>
+    </div>
+<script>
+
+	
+    async function userLogin(){
+
+
+	// get each values from the inputs in the login section [must had an ID]
+
+	let usernameVal = document.getElementById("usernameInput").value;
+	let pass = document.getElementById("passwordInput").value;
+
+	console.log(usernameVal + " " + pass);
+	const url = "http://localhost:7000/logmein"
+
+	// fetch all users and create log of the arrays
+	let login = {
+		username: usernameVal,
+		passcode: pass
+    }
+
+	const headers = new Headers();
+	// headers.set('Authorization',user + ":" + psw);
+	const httpresponse = await fetch(url, {
+		method: 'POST',
+		body: JSON.stringify(login),
+		headers: {
+			"Content-type": "user/json; charset=UTF-8"
+		}
+	});
+    console.log(JSON.stringify(login));
+	const body = await httpresponse.json()
+	console.log(body);
+
+
+	if(body.message = null) {
+		sessionStorage.setItem("userID", body.userID);
+        sessionStorage.setItem("firstName", body.firstName);
+       	sessionStorage.setItem("lastName", body.lastName);
+        sessionStorage.setItem("username", body.username);
+		sessionStorage.setItem("email", body.email);
+		sessionStorage.setItem("phone", body.phone);
+        sessionStorage.setItem("passcode", body.passcode);
+		sessionStorage.setItem("permID", body.permID);
+		sessionStorage.setItem("generalUser", body.generalUser);
+		sessionStorage.setItem("adminPerm", body.adminPerm);
+	}
+
+	if(body.adminPerm != null) {
+		window.location = "./admin-profile.html"
+	} else if (body.generalUser != null) {
+		window.location = "./user-profile.html"
+	} else if (body.permID == 0) {
+        window.location = "./user-profile.html"
+    } else {
+		alert("Please try again - Log in failure");
+		console.log("failure")
+	}
+	
+}
+
+</script>
+</body>
+<<<<<<< HEAD
+<!--JS file for navigation top-->
+<script src="navigation-top.js"></script>
+</html>
+=======
+</html>
+>>>>>>> 10cb1bed93e85d2fc47c20258e9b92ebac32dde5

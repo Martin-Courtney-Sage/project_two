@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Request Page</title>
+    <!--navigation top style sheet-->
+	<link rel="stylesheet" href="navigation-top.css">
+	<!--navigation to sidebar style sheet-->
+	<link rel="stylesheet" href="sidebar-nav.css">
+    <style>
+        #mainbody {
+            text-align: center;
+            padding-top: 0;
+            width: 100%;
+        }
+
+        #creditTable {
+            width: 80%;
+            padding-bottom: 20%;
+            float: right;
+            background: rgb(230,230,230);
+        }
+
+        #loanTable {
+            width: 80%;
+            padding-bottom: 20%;
+            float: right;
+            background: rgb(230,230,230);
+        }
+
+        #jobTable {
+            width: 80%;
+            padding-bottom: 20%;
+            float: right;
+            background: rgb(230,230,230);
+        }
+
+    </style>
+</head>
+<body style="background-color:whitesmoke;">
+		<!--navigation top-->
+		<div class="topnav" id="myTopnav">
+			<a id="home-page" class="glossymenu" href="bankWelcomePage.html"> ::: WELCOME :::</a><br>
+			<a id="about-page" class="glossymenu" href="about-page.html">::: ABOUT US :::</a><br>
+			<a id="login-page" class="glossymenu" href="proj2Login.html">::: LOGIN / SIGNUP :::</a><br>
+			<a id="service-page" class="glossymenu" href="customer-service.html">::: HELP :::</a>
+		</div>
+		<!--end of navigation top-->
+
+    <div id="mainbody">
+        <h1 id="welcome"></h1>
+	    <h1>Make a Request Here</h1>
+
+        
+            <label id="requests">Select Your Request Form</label>
+            <select id="requestType">
+                <option selected value="credit">Credit Card Request</option>
+                <option value="loan">Loan Request</option>
+                <option value="job">Job Application Request</option>
+            </select>
+            <button onclick="getApp()">Select</button> 
+
+    </div>
+    <div id="creditTable" style="display: none; margin-left: 20%;">
+        <table class="center">
+            <tr>
+                <td>Card Type:</td>
+                    <td>
+                        <select id="creditType" name="type" required>
+                            <option value="debit">Debit Card</option>
+                            <option selected value="credit">Credit Card</option>
+                        </select>
+                    </td>
+            </tr>
+            <tr>
+                <td>Credit Limit:</td>
+                <td>
+                    <input id="limit" type="text" name="description" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+                <td>
+                    <p id="creditStatus" type="text" name="credit">PENDING</p>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" onclick="submitAppCredit()">SUBMIT</button>
+    </div>
+
+    <div id="loanTable"  style="display: none; margin-left: 20%;">
+        <table class="center">
+            <tr>
+                <td>Loan Amount:</td>
+                <td>
+                    <input id="loanAmount" type="text" name="loan amount" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Loan Term:</td>
+                    <td>
+                        <select id="loanTerm" name="description" required>
+                            <option value="12">12 months</option>
+                            <option value="24">24 months</option>
+                            <option value="36">36 months</option>
+                        </select>
+                    </td>
+            </tr>
+            <tr>
+                <td>Loan Type:</td>
+                    <td>
+                        <select id="loanType" name="loantype" required>
+                            <option value="auto">Auto</option>
+                            <option value="home">Home</option>
+                            <option value="personal">Personal</option>
+                            <option value="business">Business</option>
+                        </select>
+                    </td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+                <td>
+                    <p id="loanStatus" type="text" name="loan">PENDING</p>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" onclick="submitAppLoan()">SUBMIT</button>
+    </div>
+    <div id="jobTable" style="display: none; margin-left: 20%;">
+        <table class="center">
+            <tr>
+                <td>Position Applying For:</td>
+                    <td>
+                        <input id="job" type="text" name="description" required>
+                    </td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+                <td>
+                    <p id="jobStatus" type="text" name="job">PENDING</p>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" onclick="submitAppJob()">SUBMIT</button>
+    </div>
+	<!--side navigation-->
+	<div id="mySidenav" class="sidenav">
+		<a id="profile-home" href="user-profile.html">Profile Home</a>
+		<a id="request-page" href="request-page.html">Make a Request (Credit, Loan, Job)</a>
+	</div>
+	<!--end of side navigation-->
+
+    
+</body>
+<!--JS file for navigation top-->
+<script src="navigation-top.js"></script>
+<script>
+    function getApp() {
+
+        const requestType = document.getElementById("requestType").value
+        console.log(requestType);
+        if(requestType=="credit"){
+            document.getElementById("creditTable").style.display="block";
+            document.getElementById("loanTable").style.display="none";
+            document.getElementById("jobTable").style.display="none";
+        }
+        else if(requestType=="loan"){
+            document.getElementById("loanTable").style.display="block";
+            document.getElementById("creditTable").style.display="none";
+            document.getElementById("jobTable").style.display="none";
+        }
+        else{
+            document.getElementById("loanTable").style.display="none";
+            document.getElementById("creditTable").style.display="none";
+            document.getElementById("jobTable").style.display="block";
+        }
+
+    }
+
+</script>
+<script>
+let userID = 1;
+let acctID = Math.random();
+let status = document.getElementById("jobStatus").innerHTML;
+window.onload = function(){
+    document.getElementById("welcome").innerHTML = "Welcome," + " " + name;
+}
+
+async function submitAppCredit(){
+    correct = false;
+    let vals = null
+
+    const creditType = document.getElementById("creditType").value;
+    const limit = document.getElementById("limit").value;
+    const creditStatus = document.getElementById("creditStatus").innerHTML
+
+    console.log("Working")
+
+    const url = `http://127.0.0.1:5000/request/credit`;
+
+    const request = {
+        'userId': userID,
+        'creditType': creditType,
+        'creditLimit': limit,
+        'reqStatus': status
+	}
+
+	console.log(request)
+
+	const httpresponse = fetch(url, {
+		method: 'POST',
+		body: JSON.stringify(request),
+		headers: {
+			"Content-type": "request/json; charset=UTF-8"
+		}
+	});
+
+	httpresponse.then(response => {
+		if(response.status==200){
+			creditStatus = "SUBMITTED"
+            correct = true;
+		}else{
+			alert("Please try again - Could not submit request");
+            console.log("Failure"); 
+		}
+	})    
+}
+
+async function submitAppLoan(){
+    correct = false;
+    let vals = null
+
+    const loanAmount = document.getElementById("loanAmount").value;
+    const loanTerm = document.getElementById("loanTerm").value;
+    const loanType = document.getElementById("loanType").value;
+    const loanStatus = document.getElementById("loanStatus").innerHTML;
+
+    console.log("Working")
+
+    const url = `http://127.0.0.1:5000/request/loan`;
+
+    const request = {
+        'userId': userID,
+        'acctId': acctID,
+        'loanAmount': loanAmount,
+        'loanTerm': loanTerm,
+        'loanType': loanType,
+        'loanStatus': loanStatus
+	}
+
+	console.log(request)
+
+	const httpresponse = fetch(url, {
+		method: 'POST',
+		body: JSON.stringify(request),
+		headers: {
+			"Content-type": "request/json; charset=UTF-8"
+		}
+	});
+
+	httpresponse.then(response => {
+		if(response.status==200){
+			loanStatus = "SUBMITTED"
+            correct = true;
+		}else{
+			alert("Please try again - Could not submit request");
+            console.log("Failure"); 
+		}
+	}) 
+}
+
+async function submitAppJob(){
+    correct = false;
+    let vals = null
+
+    const positionApp = document.getElementById("job").value;
+    const jobStatus = document.getElementById("jobStatus").innerHTML 
+
+    console.log("Working")
+
+    const url = `http://127.0.0.1:5000/request/job`;
+
+    const request = {
+        'userId': userID,
+        'positionApp': positionApp,
+        'jobStatus': jobStatus
+	}
+
+	console.log(request)
+
+	const httpresponse = fetch(url, {
+		method: 'POST',
+		body: JSON.stringify(request),
+		headers: {
+			"Content-type": "request/json; charset=UTF-8"
+		}
+	});
+
+	httpresponse.then(response => {
+		if(response.status==200){
+			jobStatus = "SUBMITTED"
+            correct = true;
+		}else{
+			alert("Please try again - Could not submit request");
+            console.log("Failure"); 
+		}
+	}) 
+    }
+</script>
+</html>

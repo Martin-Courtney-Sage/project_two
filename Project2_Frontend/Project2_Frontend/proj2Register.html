@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Register Page</title>
+    <!--navigation top style sheet-->
+	<link rel="stylesheet" href="navigation-top.css">
+
+    <style>
+        #registerForm {
+            width: 80%;
+            margin-left: 20%;
+        }
+    </style>
+     
+</head>
+
+<body style="background-color:whitesmoke; padding-top: 1%">
+		<!--navigation top-->
+		<div class="topnav" id="myTopnav">
+			<a id="home-page" class="glossymenu" href="bankWelcomePage.html"> ::: WELCOME :::</a><br>
+			<a id="about-page" class="glossymenu" href="about-page.html">::: ABOUT US :::</a><br>
+			<a id="login-page" class="glossymenu" href="proj2Login.html">::: LOGIN / SIGNUP :::</a><br>
+			<a id="service-page" class="glossymenu" href="customer-service.html">::: HELP :::</a>
+		</div>
+		<!--end of navigation top-->
+	<br>
+    <br>
+    <div id="registerForm">	
+        <h1>
+            <p style="text-align:center;">Revature Bank</p>
+         </h1>
+    <p style="text-align:center;">Please fill out your information <br>
+        to be able to logging and register.</p>
+    <table style="width: 33%; margin: 0 auto;">
+        <tr>
+            <td class="header"><label for="firstNameInput">First Name:</label></td>
+            <td><input type="text" id="firstNameInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="lastNameInput">Last Name:</label></td>
+            <td><input type="text" id="lastNameInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="emailInput">Email:</label></td>
+            <td><input type="email" id="emailInput" /></td>
+        </tr>
+		<tr>
+            <td class="header"><label for="phoneInput">Phone:</label></td>
+            <td><input type="text" id="phoneInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="userNameInput">Create Username:</label></td>
+            <td><input type="text" id="userNameInput" /></td>
+        </tr>
+        <tr>
+            <td class="header"><label for="passwordInput">Create Password:</label></td>
+            <td><input type="password" id="passwordInput" /></td>
+        </tr>
+        <br>
+        <tr>
+            <td><button onclick="registerUser()" style="width: 60%; padding: 25px; margin: 0 auto;">Register</button></td>
+        </tr>
+    </table>
+    </div>
+
+    <br>
+    
+
+</body>
+<script>
+
+    async function registerUser() {
+
+        console.log("Working")
+
+        const firstNameVal = document.getElementById("firstNameInput").value
+        const lastNameVal = document.getElementById("lastNameInput").value
+        const emailVal = document.getElementById("emailInput").value
+		const phoneVal = document.getElementById("phoneInput").value
+        const usernameVal = document.getElementById("userNameInput").value
+        const passwordVal = document.getElementById("passwordInput").value
+        const permID = 1
+        const general = "generalUser"
+        const admin = null
+
+        console.log(firstNameVal)
+        console.log(lastNameVal)
+        console.log(emailVal)
+		console.log(phoneVal)
+        console.log(usernameVal)
+        console.log(passwordVal)
+        console.log(permID)
+        console.log(general)
+        console.log(admin)
+
+        const user = {
+            "first_name": firstNameVal,
+            "last_name": lastNameVal,
+            "email": emailVal,
+			"phone": phoneVal,
+            "username": usernameVal,
+            "passcode": passwordVal,
+            "permID": permID,
+            "generalUser": general,
+            "adminPerm": admin
+        }
+
+        const url = `http://localhost:7000/registerme`;
+
+        const httpResponse = await fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'user/json'
+            },
+            body: JSON.stringify(user)
+        });
+
+        const body = await httpResponse.json();
+
+        console.log(body);
+        if (body.message==null) {
+            alert("User Successfully Added!")
+		
+		// Successful registration automaically logs in the user.
+		sessionStorage.setItem("userID", body.userID);
+        sessionStorage.setItem("firstName", body.firstName);
+       	sessionStorage.setItem("lastName", body.lastName);
+        sessionStorage.setItem("username", body.username);
+		sessionStorage.setItem("email", body.email);
+		sessionStorage.setItem("phone", body.phone);
+        sessionStorage.setItem("passcode", body.passcode);
+		sessionStorage.setItem("permID", body.permID);
+		sessionStorage.setItem("generalUser", body.generalUser);
+		sessionStorage.setItem("adminPerm", body.adminPerm);
+		window.location = "./proj2Login.html" // Change to User profile page!
+        } else {
+            alert("Failed to add User")
+        } 
+    }
+</script>
+<!--JS file for navigation top-->
+<script src="navigation-top.js"></script>
+</html>

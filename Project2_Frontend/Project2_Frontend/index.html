@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Customer ServiceBot</title>
+  <link href="https://fonts.googleapis.com/css?family=Sniglet:400,800" rel="stylesheet">
+  <link href="main.css" rel="stylesheet">
+    	<!--navigation top style sheet-->
+	<link rel="stylesheet" href="navigation-top.css">
+</head>
+
+<body style="background-color:rgb(160, 158, 158);" onload="bot(); questionNum++;">
+  <!--navigation top-->
+  <div class="topnav" id="myTopnav">
+    <a id="home-page" class="glossymenu" href="bankWelcomePage.html"> WELCOME :::</a>
+    <a id="profile-page" class="glossymenu" href="user-profile.html">::: USER PROFILE :::</a>
+    <a id="about-page" class="glossymenu" href="#"onClick="window.open('http://','WindowA','width=400,height=600,scrullbars=no');">::: ABOUT US :::</a>
+      <a id="login-page" class="glossymenu" href="proj2Login.html">::: LOGIN / SIGNUP</a></div>
+      </div>
+  <!--end of navigation top-->
+  <div id="chat-wrapper">
+      <div id="chatbox">
+        <div id="output"></div>
+        <div id="input"></div>
+      </div>
+      <input name="inputmsg" type="text" id="usermsg" size="63" placeholder="type your message here">
+      <button type="submit" onclick="bot(); questionNum++;">send</button>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
+  <script src="bot.js"></script>
+</body>
+<!--JS file for navigation top-->
+<script src="navigation-top.js"></script>
+</html>

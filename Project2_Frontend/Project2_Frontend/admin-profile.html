@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Profile</title>
+    <!--navigation top style sheet-->
+	<link rel="stylesheet" href="navigation-top.css">
+	<!--navigation to sidebar style sheet-->
+	<link rel="stylesheet" href="sidebar-nav.css">
+	<style>
+		#mainbody {
+            text-align: center;
+            padding-top: 0;
+            width: 100%;
+        }
+
+        table {
+            width: 80%;
+            padding-bottom: 20%;
+            float: right;
+            background: rgb(230,230,230);
+            
+        }
+	</style>
+</head>
+<body style="background-color:whitesmoke;">
+		<!--navigation top-->
+		<div class="topnav" id="myTopnav">
+			<a id="home-page" class="glossymenu" href="bankWelcomePage.html"> ::: WELCOME :::</a><br>
+			<a id="about-page" class="glossymenu" href="about-page.html">::: ABOUT US :::</a><br>
+			<a id="login-page" class="glossymenu" href="proj2Login.html">::: LOGIN / SIGNUP :::</a><br>
+			<a id="service-page" class="glossymenu" href="customer-service.html">::: HELP :::</a>
+		</div>
+		<!--end of navigation top-->
+
+	<h1 id="mainbody"></h1>
+    <h1 style="text-align:center;">Accounts</h1>
+
+	<!--side navigation-->
+	<div id="mySidenav" class="sidenav">
+		<a id="profile-home" href="admin-profile.html">Profile Home</a>
+		<a id="request-page" href="bankWelcomePage.html">Log Out</a>
+	</div>
+	<!--end of side navigation-->
+
+	<table>
+		<tbody id="adminProfile">
+
+		</tbody>
+	</table>
+	<!-- Should follow user profile but be able to choose credit/job/loan requests with if statement-->
+    <script>
+		window.onload = getReq();
+		let name = sessionStorage.getItem('firstName');
+		document.getElementById("mainbody").innerHTML = "Welcome, Admin"
+		
+		async function getReq() {
+			console.log("Getting Accounts")
+			const httpResponse = await fetch("http://127.0.0.1:5000/requests/credit/1")
+			console.log(httpResponse)
+		
+			const body = await httpResponse.json()
+			
+			let result = []
+			for(var i in body){
+				result.push(body);
+			}
+		
+			console.log(result)
+		
+			function drawTable(tbody) {
+				var tbody = document.getElementById("userProfile");
+				var accounts = new Array();
+				accounts[0] = {account: null, user: null, type: null, balance: null};
+				var headerNames = Object.getOwnPropertyNames(accounts[0]);
+				var columnCount = headerNames.length;
+				var row = tbody.insertRow(-1);
+				for (var i = 0; i < columnCount; i++) {
+					var headerCell = document.createElement("TH");
+					headerCell.innerHTML = headerNames[i];
+					row.appendChild(headerCell);
+				}
+				
+				var tr, td;
+			
+			for (var i = 0; i < result.length; i++) {
+				tr = tbody.insertRow(tbody.rows.length);
+				td = tr.insertCell(tr.cells.length);
+				td.setAttribute("align", "center");
+		
+				td.innerHTML = result[i].acctId;
+				td = tr.insertCell(tr.cells.length);
+				td.innerHTML = result[i].userId;
+				td = tr.insertCell(tr.cells.length);
+				td.innerHTML = result[i].accountType;
+				td = tr.insertCell(tr.cells.length);
+				td.innerHTML = result[i].accountBalance;
+			}
+		}
+			drawTable("userProfile");
+		}
+		</script>
+</body>
+</html>

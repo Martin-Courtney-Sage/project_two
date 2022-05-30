@@ -1,0 +1,44 @@
+#chat-wrapper {
+    float: right;
+    display: block;
+    position: relative;
+    width: 80%;
+    padding-bottom: 2%;
+    background: rgb(230, 230, 230);
+}
+
+#chatbox {
+    margin: auto;
+    width: 50%;
+    height: 400px;
+    background: whitesmoke;
+    border: 20px solid rgb(255, 255, 255);
+    padding: 2%;
+}
+
+#output {
+    text-align: left;
+    position: relative;
+	top: 10%;
+	left: 0px;
+    right: 5%;
+    width: 100%;
+}
+
+#input {
+    text-align: right;
+    position: relative;
+	top: -10%;
+	left: 0px;
+    right: 5%;
+    width: 100%;
+}
+
+#usermsg {
+    padding: 2%;
+    width: 20%;
+}
+
+#chat-submit {
+    padding: 2%;
+}

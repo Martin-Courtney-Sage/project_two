@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Customer Service</title>
+  <link href="https://fonts.googleapis.com/css?family=Sniglet:400,800" rel="stylesheet">
+  <link href="main.css" rel="stylesheet">
+  <link rel="stylesheet" href="navigation-top.css">
+</head>
+
+<body onload="bot(); questionNum++;" style="background-color:whitesmoke; text-align: center; padding-top: .8%">
+  <!--navigation top-->
+  <div class="topnav" id="myTopnav">
+    <a id="home-page" class="glossymenu" href="bankWelcomePage.html"> ::: WELCOME :::</a><br>
+    <a id="about-page" class="glossymenu" href="about-page.html">::: ABOUT US :::</a><br>
+    <a id="login-page" class="glossymenu" href="proj2Login.html">::: LOGIN / SIGNUP :::</a><br>
+    <a id="service-page" class="glossymenu" href="customer-service.html">::: HELP :::</a>
+  </div>
+<!--end of navigation top-->
+  <div id="chat-wrapper">
+      <div id="chatbox">
+        <div id="output"></div>
+        <div id="input"></div>
+      </div>
+      <div id="field">
+        <input name="inputmsg" type="text" id="usermsg" placeholder="type your message here">
+        <button id="chat-submit" type="submit" onclick="bot();">send</button>
+      </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
+  <script src="bot.js"></script>
+  <script src="navigation-top.js"></script>
+</body>
+
+</html>
