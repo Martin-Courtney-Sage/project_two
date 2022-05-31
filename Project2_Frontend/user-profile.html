@@ -39,6 +39,14 @@
     <button type="submit" onclick="getUser()" style="display: block; margin: 0 auto;">View Accounts</button>
     <button type="submit" onclick="putAcct()" style="display: block; margin: 0 auto;">Update Accounts</button>
     <button type="submit" onclick="delAcct()" style="display: block; margin: 0 auto;">Delete Accounts</button>
+    <button type="submit" onclick="getrequestcredit() "style="display: block; margin: 0 auto;">Get Credit Request</button>
+
+    <!-- <div>
+        <h3>View Credit Request</h3>
+        <label for="idInputOne">Request ID:</label>
+        <input type="number" id="idInputOne" value="1" min="1">
+        <button type="submit" onclick="getrequestcredit() "style="display: block; margin: 0 auto;">Get Request</button>
+    </div> -->
 
 	<!--side navigation-->
 	<div id="mySidenav" class="sidenav">
@@ -68,10 +76,48 @@
             </tr>
 		</tbody>
 	</table>
+
+    
+    <table>
+        <tbody id ="creditRequest">
+            <tr>
+                <td>ID</td>
+                <td id="req"></td>
+            </tr>
+        </tbody>
+    </table>
     
 </body>
 <script>
+
+
+
 document.getElementById("mainbody").innerHTML = "Welcome, to your profile"
+    acct = document.getElementById("acct").innerHTML
+    userId = parseInt(sessionStorage.getItem('userID'))
+   // const user = document.getElementById("user").innerHTML
+    type = document.getElementById("type").innerHTML
+    bal = document.getElementById("bal").innerHTML
+
+// async function getrequestcredit() {
+
+//     user_id = parseInt(sessionStorage.getItem('userID'))
+//     const url = `http://127.0.0.1:5000/requests/credit/${user_id}`
+//     const httpResponse = await fetch(url)
+//     const body = await httpResponse.json()
+//     console.log(body)
+
+// }
+
+    // function populateTable(body) {
+//     console.log(body)
+//     //body = JSON.parse(body);
+//     console.log(typeof(body));
+//     document.getElementById("acct").innerHTML = body['acctId']
+//     document.getElementById("user").innerHTML = body['userId']
+//     document.getElementById("type").innerHTML = body['accountType']
+//     document.getElementById("bal").innerHTML = body['accountBalance']
+// }
 
 async function putAcct(){
 
@@ -83,41 +129,68 @@ async function delAcct(){
 
 async function getUser() {
     correct = false;
-    let acct = document.getElementById("acct").innerHTML
-    let user = document.getElementById("user").innerHTML
-    let type = document.getElementById("type").innerHTML
-    let bal = document.getElementById("bal").innerHTML
+    // let acct = document.getElementById("acct").innerHTML
+    // let userId = parseInt(sessionStorage.getItem('userID'))
+    // //let user = document.getElementById("user").innerHTML
+    // let type = document.getElementById("type").innerHTML
+    // let bal = document.getElementById("bal").innerHTML
 
     console.log("Getting Accounts")
 
-    const url = `http://127.0.0.1:5000/accounts/1`;
+    const httpResponse = await fetch(`http://127.0.0.1:5000/accounts/${userId}`)
+    console.log(httpResponse)
 
-    const request = {
-        'userId': userID,
-        'creditType': creditType,
-        'creditLimit': limit,
-        'reqStatus': status
-	}
+    const body = await httpResponse.json()
+    
+    let result = []
+    for(var i in body){
+        result.push(body[i])
+    }
+    console.log(result);
+    // acct = result[i].acctId
+    // user = result[i].userId
+    // type = result[i].accountType
+    // bal = result[i].accountBalance
 
-	console.log(request)
+    for (var i = 0; i < result.length; i++) {
+	    acct = result[i].acct_id;
+	    user = result[i].user_id;
+	    type = result[i].account_type;
+	    bal = result[i].account_balance
 
-	const httpresponse = fetch(url, {
-		method: 'GET',
-		body: JSON.stringify(request),
-		headers: {
-			"Content-type": "request/json; charset=UTF-8"
-		}
-	});
+    }
 
-	httpresponse.then(response => {
-		if(response.status==200){
-			creditStatus = "SUBMITTED"
-            correct = true;
-		}else{
-			alert("Please try again - Could not submit request");
-            console.log("Failure"); 
-		}
-	})    
+    // populateTable(result[0])
+
+    // const url = `http://127.0.0.1:5000/accounts/${userId}`;
+
+    // const request = {
+    //     'acctId': acct,
+    //     'userId': userId,
+    //     'accountType': type,
+    //     'accountBalance': bal
+	// }
+
+	// console.log(request)
+
+	// const httpresponse = fetch(url, {
+	// 	method: 'GET',
+	// 	body: JSON.stringify(request),
+	// 	headers: {
+	// 		"Content-type": "request/json; charset=UTF-8"
+	// 	}
+	// });
+
+	// httpresponse.then(response => {
+	// 	if(response.status==200){
+    //         correct = true;
+	// 	}else{
+	// 		alert("Please try again - Could not get accounts");
+    //         console.log("Failure"); 
+	// 	}
+	// })
+    
+    
 }
 
 
