@@ -36,10 +36,12 @@
     <br>
     <br>
     <h1 style="text-align:center;">Accounts</h1>
-    <button type="submit" onclick="getUser()" style="display: block; margin: 0 auto;">View Accounts</button>
-    <button type="submit" onclick="putAcct()" style="display: block; margin: 0 auto;">Update Accounts</button>
-    <button type="submit" onclick="delAcct()" style="display: block; margin: 0 auto;">Delete Accounts</button>
-    <button type="submit" onclick="getrequestcredit() "style="display: block; margin: 0 auto;">Get Credit Request</button>
+    <div>
+        <h3>Delete Account</h3>
+        <label for="deleteInput">Account ID:</label>
+        <input type="number" id="deleteInput" value="1" min="1">
+        <button type="submit" onclick="delAcct()" style="display: block; margin: 0 auto;">Delete Account</button>
+    </div>
 
     <!-- <div>
         <h3>View Credit Request</h3>
@@ -77,6 +79,7 @@
             </tr>
 		</tbody>
 	</table>
+    <button type="submit" onclick="getUser()" style="display: block; margin: 0 auto;">View Accounts</button>
     </div>
     
     <div id="tableB">
@@ -104,12 +107,46 @@
             </tr>
         </tbody>
     </table>
+    <button type="submit" onclick="getrequestcredit() "style="display: block; margin: 0 auto;">Get Credit Request</button>
     </div>
-    
+
+	<div id="tableC">
+    <table>
+        <tbody id="accountProfile">
+            <tr>
+                <td>ACCOUNT</td>
+                <td id="account_table">
+                    <input type="number" id="account" value="1" min="1">
+                </td>
+            </tr>
+            <tr>
+                <td>USER</td>
+                <td id="user3_table">
+                    <input type="number" id="user3" value="1" min="1">
+                </td>
+            </tr>
+            <tr>
+                <td>TYPE</td>
+                <td id="type3_table">
+                    <input type="text" id="type3">
+                </td>
+            </tr>
+            <tr>
+                <td>BALANCE</td>
+                <td id="balance_table">
+                    <input type="number" id="balance" value="0.00" min="0">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit" onclick="putAcct()" style="display: block; margin: 0 auto;">Update Account</button>
+    </div>
+
 </body>
 <script>
 
-document.getElementById("mainbody").innerHTML = "Welcome, to your profile"
+var firstName = sessionStorage.getItem('firstName');
+document.getElementById("mainbody").innerHTML = "Welcome, to your profile " + firstName
     acct = document.getElementById("acct").innerHTML
     userId = parseInt(sessionStorage.getItem('userID'))
    // const user = document.getElementById("user").innerHTML
@@ -127,14 +164,25 @@ function populateTableA(body) {
 }
 
 function populateTableB(body) {
+    console.log(Object.keys(body))
+	//console.log(JSON.parse(body[0])['reqId'])
+    //body = JSON.parse(body);
+    console.log(typeof(body));
+    document.getElementById("req").innerHTML = body[0].reqId
+    document.getElementById("user2").innerHTML = body[0].userId
+    document.getElementById("type2").innerHTML = body[0].cardType
+    document.getElementById("limit").innerHTML = body[0].creditLimit
+    document.getElementById("status").innerHTML = body[0].reqStatus
+}
+
+function populateTableC(body) {
     console.log(body)
     //body = JSON.parse(body);
     console.log(typeof(body));
-    document.getElementById("req").innerHTML = body['reqId']
-    document.getElementById("user2").innerHTML = body['userId']
-    document.getElementById("type2").innerHTML = body['cardType']
-    document.getElementById("limit").innerHTML = body['creditLimit']
-    document.getElementById("status").innerHTML = body['reqStatus']
+    document.getElementById("account").innerHTML = body['acctId']
+    document.getElementById("user3").innerHTML = body['userId']
+    document.getElementById("type3").innerHTML = body['accountType']
+    document.getElementById("balance").innerHTML = body['accountBalance']
 }
 
 async function getrequestcredit() {
@@ -147,11 +195,50 @@ async function getrequestcredit() {
 }
 
 async function putAcct(){
+    const acct_id = document.getElementById("account").value
+    const user_id = document.getElementById("user3").value
+    const account_type = document.getElementById("type3").value
+    const account_balance = document.getElementById("balance").value
 
+    const data = {
+        acctId: acct_id,
+        userId: user_id,
+        accountType: account_type,
+        accountBalance: account_balance
+    }
+
+    const url = `http://127.0.0.1:5000/account/${acct_id}`
+    const httpResponce = await fetch(url, {
+        method:"PUT",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    const body = await httpResponce
+    console.log(body);
+    if(body) {
+        console.log("Successfully Updated")
+    }
+    else{
+       Console.log("Unsuccessfull Please try again")
+}
 }
 
 async function delAcct(){
-
+    const acct_id = document.getElementById("deleteInput").value
+    const url = `http://127.0.0.1:5000/user/${acct_id}`
+    const httpResponce = await fetch(url, {
+        method:"DELETE"});
+    const body = await httpResponce
+    console.log(body);
+    if(body) {
+        alert("Account successfully deleted")
+    }
+    else {
+        alert("Failed to delete Account")
+    }
 }
 
 async function getUser() {

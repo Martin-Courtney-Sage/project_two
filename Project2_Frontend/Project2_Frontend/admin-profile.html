@@ -33,7 +33,7 @@
 		<!--end of navigation top-->
 
 	<h1 id="mainbody"></h1>
-    <h1 style="text-align:center;">Admin</h1>
+     <h1 style="text-align:center;">Admin</h1>
 
 	<!--side navigation-->
 	<div id="mySidenav" class="sidenav">
@@ -53,9 +53,9 @@
     
 	<button type="submit" onclick="approvecredit()" style="display: block; margin: 0 auto;">Approve Credit Request</button>
 
-	<div id="tableA">
+	<div id="table">
 		<table>
-			<tbody id ="creditRequest">
+			<tbody>
 				<tr>
 					<td>ID</td>
 					<td id="req">-</td>
@@ -74,7 +74,7 @@
 				</tr>
 				<tr>
 					<td>STATUS</td>
-					<td>-
+					<td><span id="reqStatus">-</span>
 						<select id='status' name='status' required>
 							<option value='Pending'>Pending</option>
 							<option value='Approved'>Approved</option>
@@ -96,23 +96,21 @@
 </body>
 
 <script>
+var firstName = sessionStorage.getItem('firstName');
 
-document.getElementById("mainbody").innerHTML = "Welcome, to your profile"
-    acct = document.getElementById("acct").innerHTML
+document.getElementById("mainbody").innerHTML = "Welcome, to your profile " + firstName
     userId = parseInt(sessionStorage.getItem('userID'))
-   // const user = document.getElementById("user").innerHTML
-    type = document.getElementById("type").innerHTML
-    bal = document.getElementById("bal").innerHTML
 
-function populateTableA(body) {
-    console.log(body)
+function populateTable(body) {
+    console.log(Object.keys(body))
+	//console.log(JSON.parse(body[0])['reqId'])
     //body = JSON.parse(body);
     console.log(typeof(body));
-    document.getElementById("req").innerHTML = body['reqId']
-    document.getElementById("user2").innerHTML = body['userId']
-    document.getElementById("type2").innerHTML = body['cardType']
-    document.getElementById("limit").innerHTML = body['creditLimit']
-    document.getElementById("status").value = body['reqStatus']
+    document.getElementById("req").innerHTML = body[0].reqId
+    document.getElementById("user2").innerHTML = body[0].userId
+    document.getElementById("type2").innerHTML = body[0].cardType
+    document.getElementById("limit").innerHTML = body[0].creditLimit
+    document.getElementById("reqStatus").innerHTML = body[0].reqStatus
 }
 
 async function getrequestcredit() {
@@ -122,45 +120,25 @@ async function getrequestcredit() {
     const httpResponse = await fetch(url)
     const body = await httpResponse.json()
     console.log(body)
-    populateTableA(body)
+    populateTable(body)
 }
 
 async function approvecredit() {
-	//console.log(body)
-	let status = document.getElementById("status").value
-	// if (status == "PENDING" || "pending"){
-	// 	status = "APPROVED"
-	// 	// alert("You have approved this request successfully!")		
 
-	// 	// const user_id = document.getElementById("idInput").value
-	// 	// status = document.getElementById("status").value
-	// 	// const url = `http://127.0.0.1:5000/request/credit/${user_id}`
-	// 	// const httpResponse = await fetch(url, {
-	// 	// 	method: "PUT",
-	// 	// 	headers: {'Content-Type': 'application.json'},
-	// 	// 	body: JSON.stringify(data)
-	// 	// });
-	// 	// const body = await httpResponse.json()
-	// 	// populateTableA(body)
+let status2 = document.getElementById("status").value
 
-	// } else if (status == "DENIED" || "denied") {
-	// 	status = "DENIED"
-	// } else {
-	// 	alert("Not Working")
-	// }
-
-const req_id = document.getElementById("req").value
-const user_id = document.getElementById("idInput").value
-const card_type = document.getElementById("type2").value
-const card_limit = document.getElementById("limit").value
-const url = `http://127.0.0.1:5000/requests/credit/${user_id}`;
+const req_id = document.getElementById("req").innerHTML
+const user_id = document.getElementById("user2").innerHTML
+const card_type = document.getElementById("type2").innerHTML
+const card_limit = document.getElementById("limit").innerHTML
+const url = `http://127.0.0.1:5000/request/credit/${user_id}`;
 
 const data = {
-    "reqId": req_id,
-    "userId": user_id,
-	"cardType": card_type,
-    "cardLimit": card_limit,
-    "status": status
+    reqId: req_id,
+    userId: user_id,
+	cardType: card_type,
+    creditLimit: card_limit,
+    reqStatus: status2
 }
 
 console.log(data)
@@ -169,13 +147,14 @@ const httpresponse = fetch(url, {
 	method: "PUT",
 	body: JSON.stringify(data),
 	headers: {
-		"Content-type": "application/json; charset=UTF-8"
+		"Content-Type": "application/json"
 	}
 });
 
 httpresponse.then(response => {
-	if(response.status==200){
+	if(response.status==201){
 		alert("You have successfully approved this request")
+		document.getElementById("reqStatus").innerHTML = document.getElementById("status").value
         correct = true;
 	}else{
 		alert("Please try again - Could not submit approval");

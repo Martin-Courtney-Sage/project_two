@@ -189,35 +189,36 @@ async function submitAppCredit(){
     correct = false;
     let vals = null
 
+    const user_id = parseInt(sessionStorage.getItem('userID'))
+
     const creditType = document.getElementById("creditType").value;
     const limit = document.getElementById("limit").value;
-    const creditStatus = document.getElementById("creditStatus").innerHTML
+    const creditStatus = "SUBMITTED";
 
     console.log("Working")
 
     const url = `http://127.0.0.1:5000/request/credit`;
 
     const request = {
-        'userId': userID,
-        'creditType': creditType,
-        'creditLimit': limit,
-        'reqStatus': status
+        userId: user_id,
+        cardType: creditType,
+        creditLimit: limit,
+        reqStatus: creditStatus
 	}
 
 	console.log(request)
 
 	const httpresponse = fetch(url, {
-		method: 'POST',
+		method: "POST",
 		body: JSON.stringify(request),
 		headers: {
-			"Content-type": "request/json; charset=UTF-8"
+			"Content-Type": "application/json"
 		}
 	});
 
-	httpresponse.then(response => {
-		if(response.status==200){
-			creditStatus = "SUBMITTED"
-            correct = true;
+    httpresponse.then(response => {
+		if(response.status==201){
+			correct = true;
 		}else{
 			alert("Please try again - Could not submit request");
             console.log("Failure"); 
@@ -253,7 +254,7 @@ async function submitAppLoan(){
 		method: 'POST',
 		body: JSON.stringify(request),
 		headers: {
-			"Content-type": "request/json; charset=UTF-8"
+			"Content-Type": "application/json"
 		}
 	});
 
@@ -291,7 +292,7 @@ async function submitAppJob(){
 		method: 'POST',
 		body: JSON.stringify(request),
 		headers: {
-			"Content-type": "request/json; charset=UTF-8"
+			"Content-Type": "application/json"
 		}
 	});
 
