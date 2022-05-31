@@ -4,8 +4,6 @@
     <title>Admin Profile</title>
     <!--navigation top style sheet-->
 	<link rel="stylesheet" href="navigation-top.css">
-	<!--navigation to sidebar style sheet-->
-	<link rel="stylesheet" href="sidebar-nav.css">
 	<style>
 		#mainbody {
             text-align: center;
@@ -14,11 +12,13 @@
         }
 
         table {
-            width: 80%;
-            padding-bottom: 20%;
-            float: right;
-            background: rgb(230,230,230);
-            
+            width: 65%;
+            float: left;
+			padding-left:38%;
+        }
+		
+		tr, td {
+            background-color: rgb(230,230,230);
         }
 	</style>
 </head>
@@ -28,31 +28,31 @@
 			<a id="home-page" class="glossymenu" href="bankWelcomePage.html"> ::: WELCOME :::</a><br>
 			<a id="about-page" class="glossymenu" href="about-page.html">::: ABOUT US :::</a><br>
 			<a id="login-page" class="glossymenu" href="proj2Login.html">::: LOGIN / SIGNUP :::</a><br>
-			<a id="service-page" class="glossymenu" href="customer-service.html">::: HELP :::</a>
+			<a id="profile-home" href="user-profile.html">::: PROFILE HOME :::</a><br>
+            <a id="request-page" href="request-page.html">::: MAKE REQUESTS:::</a><br>
+			<a id="service-page" class="glossymenu" href="customer-service.html">::: HELP :::</a><br>
 		</div>
 		<!--end of navigation top-->
 
 	<h1 id="mainbody"></h1>
-     <h1 style="text-align:center;">Admin</h1>
+    <h1 style="text-align:center;">Admin</h1>
 
-	<!--side navigation-->
-	<div id="mySidenav" class="sidenav">
-		<a id="profile-home" href="admin-profile.html">Profile Home</a>
-		<a id="request-page" href="bankWelcomePage.html">Log Out</a>
-	</div>
-	<!--end of side navigation-->
     <br>
+	<h2 style="text-align:center; text-decoration:underline;">Admin Request Actions</h2>
     <br>
 
-	<div id="viewRequests">
-		<h3>View Credit Requests Submitted</h3>
+	<div id="viewRequests" style="float:left; padding-left:42%;">
+		<h3>View Submitted Requests (Credit):</h3>
+		<div>
 			<label for="idInput">User ID:</label>
 			<input type="number" id="idInput" value="1" min="1">
-			<button type="submit" onclick="getrequestcredit()" style="display: block; margin: 0 auto;">Get Credit Request</button>
+		</div>
+		<br>
+		<button type="submit" onclick="getrequestcredit()" style="display: block; margin: 0 auto;">Get Credit Request</button>
+		<br>
+		<button type="submit" onclick="approvecredit()" style="display: block; margin: 0 auto;">Approve Credit Request</button>
+		<br>
 	</div>
-    
-	<button type="submit" onclick="approvecredit()" style="display: block; margin: 0 auto;">Approve Credit Request</button>
-
 	<div id="table">
 		<table>
 			<tbody>
@@ -85,13 +85,6 @@
 			</tbody>
 		</table>
 	</div>
-
-
-	<table>
-		<tbody id="adminProfile">
-
-		</tbody>
-	</table>
 
 </body>
 

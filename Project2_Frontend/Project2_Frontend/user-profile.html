@@ -4,8 +4,6 @@
     <title>User Profile</title>
     <!--navigation top style sheet-->
 	<link rel="stylesheet" href="navigation-top.css">
-	<!--navigation to sidebar style sheet-->
-	<link rel="stylesheet" href="sidebar-nav.css">
     <style>
         #mainbody {
             text-align: center;
@@ -13,13 +11,10 @@
             width: 100%;
         }
 
-        table {
-            width: 80%;
-            padding-bottom: 20%;
-            float: right;
-            background: rgb(230,230,230);
-            
+        tr, td {
+            background-color: rgb(230,230,230);
         }
+
     </style>
 </head>
 <body style="background-color:whitesmoke;">
@@ -28,60 +23,59 @@
 			<a id="home-page" class="glossymenu" href="bankWelcomePage.html"> ::: WELCOME :::</a><br>
 			<a id="about-page" class="glossymenu" href="about-page.html">::: ABOUT US :::</a><br>
 			<a id="login-page" class="glossymenu" href="proj2Login.html">::: LOGIN / SIGNUP :::</a><br>
-			<a id="service-page" class="glossymenu" href="customer-service.html">::: HELP :::</a>
+            <a id="profile-home" href="user-profile.html">::: PROFILE HOME :::</a><br>
+            <a id="request-page" href="request-page.html">::: MAKE REQUESTS:::</a><br>
+			<a id="service-page" class="glossymenu" href="customer-service.html">::: HELP :::</a><br>
 		</div>
 		<!--end of navigation top-->
 
 	<h1 id="mainbody"></h1>
     <br>
+    <h2 style="text-align:center; text-decoration:underline;">Accounts & Actions</h2>
     <br>
-    <h1 style="text-align:center;">Accounts</h1>
-    <div>
-        <h3>Delete Account</h3>
-        <label for="deleteInput">Account ID:</label>
+    <!--Get Account-->
+    <div style="float:left; padding-left:32%;">
+        <h3>VIEW ACCOUNTS:</h3>
+        <div id="tableA">
+            <table>
+                <tbody id="userProfile">
+                    <tr>
+                        <td>ACCOUNT</td>
+                        <td id="acct">-</td>
+                    </tr>
+                    <tr>
+                        <td>USER</td>
+                        <td id="user">-</td>
+                    </tr>
+                    <tr>
+                        <td>TYPE</td>
+                        <td id="type">-</td>
+                    </tr>
+                    <tr>
+                        <td>BALANCE</td>
+                        <td id="bal">-</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <button type="submit" onclick="getUser()" style="display: block; margin: 0 auto;">View Accounts</button>
+            <br>
+        </div>
+    </div>
+    <!--Delete Account-->
+    <div style="padding-left:58%;">
+        <h3>DELETE ACCOUNT:</h3>
+        <label for="deleteInput">Account ID:<br></label><br>
         <input type="number" id="deleteInput" value="1" min="1">
-        <button type="submit" onclick="delAcct()" style="display: block; margin: 0 auto;">Delete Account</button>
+        <div style="padding-right:88%;">
+            <br><br><button type="submit" onclick="delAcct()" style="display: block; margin: 0 auto;">Delete Account</button>
+        </div>
+        <br>
     </div>
 
-    <!-- <div>
-        <h3>View Credit Request</h3>
-        <label for="idInputOne">Request ID:</label>
-        <input type="number" id="idInputOne" value="1" min="1">
-        <button type="submit" onclick="getrequestcredit() "style="display: block; margin: 0 auto;">Get Request</button>
-    </div> -->
-
-	<!--side navigation-->
-	<div id="mySidenav" class="sidenav">
-		<a id="profile-home" href="user-profile.html">Profile Home</a>
-		<a id="request-page" href="request-page.html">Make a Request (Credit, Loan, Job)</a>
-        <a id="welcome-page" href="bankWelcomePage.html">Log Out</a>
-	</div>
-	<!--end of side navigation-->
-
-	<div id="tableA">
-    <table>
-		<tbody id="userProfile">
-            <tr>
-                <td>ACCOUNT</td>
-                <td id="acct">-</td>
-            </tr>
-            <tr>
-                <td>USER</td>
-                <td id="user">-</td>
-            </tr>
-            <tr>
-                <td>TYPE</td>
-                <td id="type">-</td>
-            </tr>
-            <tr>
-                <td>BALANCE</td>
-                <td id="bal">-</td>
-            </tr>
-		</tbody>
-	</table>
-    <button type="submit" onclick="getUser()" style="display: block; margin: 0 auto;">View Accounts</button>
-    </div>
-    
+    <!--View Requests-->
+    <div style="float:left; padding-left:32%;">
+    <h3>VIEW REQUESTS:</h3>
     <div id="tableB">
     <table>
         <tbody id ="creditRequest">
@@ -107,9 +101,15 @@
             </tr>
         </tbody>
     </table>
+    <br>
     <button type="submit" onclick="getrequestcredit() "style="display: block; margin: 0 auto;">Get Credit Request</button>
+    <br>
+    </div>
     </div>
 
+    <!--Update Account-->
+    <div style="float:right; padding-right:25%;">
+    <h3>UPDATE ACCOUNT:</h3>
 	<div id="tableC">
     <table>
         <tbody id="accountProfile">
@@ -139,7 +139,10 @@
             </tr>
         </tbody>
     </table>
+    <br>
     <button type="submit" onclick="putAcct()" style="display: block; margin: 0 auto;">Update Account</button>
+    <br>
+    </div>
     </div>
 
 </body>
