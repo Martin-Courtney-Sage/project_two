@@ -33,7 +33,7 @@
 		<!--end of navigation top-->
 
 	<h1 id="mainbody"></h1>
-    <h1 style="text-align:center;">Accounts</h1>
+    <h1 style="text-align:center;">Admin</h1>
 
 	<!--side navigation-->
 	<div id="mySidenav" class="sidenav">
@@ -41,63 +41,149 @@
 		<a id="request-page" href="bankWelcomePage.html">Log Out</a>
 	</div>
 	<!--end of side navigation-->
+    <br>
+    <br>
+
+	<div id="viewRequests">
+		<h3>View Credit Requests Submitted</h3>
+			<label for="idInput">User ID:</label>
+			<input type="number" id="idInput" value="1" min="1">
+			<button type="submit" onclick="getrequestcredit()" style="display: block; margin: 0 auto;">Get Credit Request</button>
+	</div>
+    
+	<button type="submit" onclick="approvecredit()" style="display: block; margin: 0 auto;">Approve Credit Request</button>
+
+	<div id="tableA">
+		<table>
+			<tbody id ="creditRequest">
+				<tr>
+					<td>ID</td>
+					<td id="req">-</td>
+				</tr>
+				<tr>
+					<td>USER</td>
+					<td id="user2">-</td>
+				</tr>
+				<tr>
+					<td>TYPE</td>
+					<td id="type2">-</td>
+				</tr>
+				<tr>
+					<td>LIMIT</td>
+					<td id="limit">-</td>
+				</tr>
+				<tr>
+					<td>STATUS</td>
+					<td>-
+						<select id='status' name='status' required>
+							<option value='Pending'>Pending</option>
+							<option value='Approved'>Approved</option>
+							<option value='Denied'>Denied</option>
+						</select>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
 
 	<table>
 		<tbody id="adminProfile">
 
 		</tbody>
 	</table>
-	<!-- Should follow user profile but be able to choose credit/job/loan requests with if statement-->
-    <script>
-		window.onload = getReq();
-		let name = sessionStorage.getItem('firstName');
-		document.getElementById("mainbody").innerHTML = "Welcome, Admin"
-		
-		async function getReq() {
-			console.log("Getting Accounts")
-			const httpResponse = await fetch("http://127.0.0.1:5000/requests/credit/1")
-			console.log(httpResponse)
-		
-			const body = await httpResponse.json()
-			
-			let result = []
-			for(var i in body){
-				result.push(body);
-			}
-		
-			console.log(result)
-		
-			function drawTable(tbody) {
-				var tbody = document.getElementById("userProfile");
-				var accounts = new Array();
-				accounts[0] = {account: null, user: null, type: null, balance: null};
-				var headerNames = Object.getOwnPropertyNames(accounts[0]);
-				var columnCount = headerNames.length;
-				var row = tbody.insertRow(-1);
-				for (var i = 0; i < columnCount; i++) {
-					var headerCell = document.createElement("TH");
-					headerCell.innerHTML = headerNames[i];
-					row.appendChild(headerCell);
-				}
-				
-				var tr, td;
-			
-			for (var i = 0; i < result.length; i++) {
-				tr = tbody.insertRow(tbody.rows.length);
-				td = tr.insertCell(tr.cells.length);
-				td.setAttribute("align", "center");
-		
-				td.innerHTML = result[i].acctId;
-				td = tr.insertCell(tr.cells.length);
-				td.innerHTML = result[i].userId;
-				td = tr.insertCell(tr.cells.length);
-				td.innerHTML = result[i].accountType;
-				td = tr.insertCell(tr.cells.length);
-				td.innerHTML = result[i].accountBalance;
-			}
-		}
-			drawTable("userProfile");
-		}
-		</script>
+
 </body>
+
+<script>
+
+document.getElementById("mainbody").innerHTML = "Welcome, to your profile"
+    acct = document.getElementById("acct").innerHTML
+    userId = parseInt(sessionStorage.getItem('userID'))
+   // const user = document.getElementById("user").innerHTML
+    type = document.getElementById("type").innerHTML
+    bal = document.getElementById("bal").innerHTML
+
+function populateTableA(body) {
+    console.log(body)
+    //body = JSON.parse(body);
+    console.log(typeof(body));
+    document.getElementById("req").innerHTML = body['reqId']
+    document.getElementById("user2").innerHTML = body['userId']
+    document.getElementById("type2").innerHTML = body['cardType']
+    document.getElementById("limit").innerHTML = body['creditLimit']
+    document.getElementById("status").value = body['reqStatus']
+}
+
+async function getrequestcredit() {
+    const user_id = document.getElementById("idInput").value
+	console.log(user_id);
+    const url = `http://127.0.0.1:5000/requests/credit/${user_id}`
+    const httpResponse = await fetch(url)
+    const body = await httpResponse.json()
+    console.log(body)
+    populateTableA(body)
+}
+
+async function approvecredit() {
+	//console.log(body)
+	let status = document.getElementById("status").value
+	// if (status == "PENDING" || "pending"){
+	// 	status = "APPROVED"
+	// 	// alert("You have approved this request successfully!")		
+
+	// 	// const user_id = document.getElementById("idInput").value
+	// 	// status = document.getElementById("status").value
+	// 	// const url = `http://127.0.0.1:5000/request/credit/${user_id}`
+	// 	// const httpResponse = await fetch(url, {
+	// 	// 	method: "PUT",
+	// 	// 	headers: {'Content-Type': 'application.json'},
+	// 	// 	body: JSON.stringify(data)
+	// 	// });
+	// 	// const body = await httpResponse.json()
+	// 	// populateTableA(body)
+
+	// } else if (status == "DENIED" || "denied") {
+	// 	status = "DENIED"
+	// } else {
+	// 	alert("Not Working")
+	// }
+
+const req_id = document.getElementById("req").value
+const user_id = document.getElementById("idInput").value
+const card_type = document.getElementById("type2").value
+const card_limit = document.getElementById("limit").value
+const url = `http://127.0.0.1:5000/requests/credit/${user_id}`;
+
+const data = {
+    "reqId": req_id,
+    "userId": user_id,
+	"cardType": card_type,
+    "cardLimit": card_limit,
+    "status": status
+}
+
+console.log(data)
+
+const httpresponse = fetch(url, {
+	method: "PUT",
+	body: JSON.stringify(data),
+	headers: {
+		"Content-type": "application/json; charset=UTF-8"
+	}
+});
+
+httpresponse.then(response => {
+	if(response.status==200){
+		alert("You have successfully approved this request")
+        correct = true;
+	}else{
+		alert("Please try again - Could not submit approval");
+        console.log("Failure"); 
+	}
+})
+}
+
+</script>
+
 </html>

@@ -52,11 +52,12 @@
 	<div id="mySidenav" class="sidenav">
 		<a id="profile-home" href="user-profile.html">Profile Home</a>
 		<a id="request-page" href="request-page.html">Make a Request (Credit, Loan, Job)</a>
-        <a id="request-page" href="bankWelcomePage.html">Log Out</a>
+        <a id="welcome-page" href="bankWelcomePage.html">Log Out</a>
 	</div>
 	<!--end of side navigation-->
 
-	<table>
+	<div id="tableA">
+    <table>
 		<tbody id="userProfile">
             <tr>
                 <td>ACCOUNT</td>
@@ -76,21 +77,37 @@
             </tr>
 		</tbody>
 	</table>
-
+    </div>
     
+    <div id="tableB">
     <table>
         <tbody id ="creditRequest">
             <tr>
                 <td>ID</td>
-                <td id="req"></td>
+                <td id="req">-</td>
+            </tr>
+            <tr>
+                <td>USER</td>
+                <td id="user2">-</td>
+            </tr>
+            <tr>
+                <td>TYPE</td>
+                <td id="type2">-</td>
+            </tr>
+            <tr>
+                <td>LIMIT</td>
+                <td id="limit">-</td>
+            </tr>
+            <tr>
+                <td>STATUS</td>
+                <td id="status">-</td>
             </tr>
         </tbody>
     </table>
+    </div>
     
 </body>
 <script>
-
-
 
 document.getElementById("mainbody").innerHTML = "Welcome, to your profile"
     acct = document.getElementById("acct").innerHTML
@@ -99,25 +116,35 @@ document.getElementById("mainbody").innerHTML = "Welcome, to your profile"
     type = document.getElementById("type").innerHTML
     bal = document.getElementById("bal").innerHTML
 
-// async function getrequestcredit() {
+function populateTableA(body) {
+    console.log(body)
+    //body = JSON.parse(body);
+    console.log(typeof(body));
+    document.getElementById("acct").innerHTML = body['acctId']
+    document.getElementById("user").innerHTML = body['userId']
+    document.getElementById("type").innerHTML = body['accountType']
+    document.getElementById("bal").innerHTML = body['accountBalance']
+}
 
-//     user_id = parseInt(sessionStorage.getItem('userID'))
-//     const url = `http://127.0.0.1:5000/requests/credit/${user_id}`
-//     const httpResponse = await fetch(url)
-//     const body = await httpResponse.json()
-//     console.log(body)
+function populateTableB(body) {
+    console.log(body)
+    //body = JSON.parse(body);
+    console.log(typeof(body));
+    document.getElementById("req").innerHTML = body['reqId']
+    document.getElementById("user2").innerHTML = body['userId']
+    document.getElementById("type2").innerHTML = body['cardType']
+    document.getElementById("limit").innerHTML = body['creditLimit']
+    document.getElementById("status").innerHTML = body['reqStatus']
+}
 
-// }
-
-    // function populateTable(body) {
-//     console.log(body)
-//     //body = JSON.parse(body);
-//     console.log(typeof(body));
-//     document.getElementById("acct").innerHTML = body['acctId']
-//     document.getElementById("user").innerHTML = body['userId']
-//     document.getElementById("type").innerHTML = body['accountType']
-//     document.getElementById("bal").innerHTML = body['accountBalance']
-// }
+async function getrequestcredit() {
+    user_id = parseInt(sessionStorage.getItem('userID'))
+    const url = `http://127.0.0.1:5000/requests/credit/${user_id}`
+    const httpResponse = await fetch(url)
+    const body = await httpResponse.json()
+    console.log(body)
+    populateTableB(body)
+}
 
 async function putAcct(){
 
@@ -160,7 +187,7 @@ async function getUser() {
 
     }
 
-    // populateTable(result[0])
+    populateTableA(result[0])
 
     // const url = `http://127.0.0.1:5000/accounts/${userId}`;
 

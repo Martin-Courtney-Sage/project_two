@@ -36,72 +36,192 @@
     <br>
     <br>
     <h1 style="text-align:center;">Accounts</h1>
+    <button type="submit" onclick="getUser()" style="display: block; margin: 0 auto;">View Accounts</button>
+    <button type="submit" onclick="putAcct()" style="display: block; margin: 0 auto;">Update Accounts</button>
+    <button type="submit" onclick="delAcct()" style="display: block; margin: 0 auto;">Delete Accounts</button>
+    <button type="submit" onclick="getrequestcredit() "style="display: block; margin: 0 auto;">Get Credit Request</button>
+
+    <!-- <div>
+        <h3>View Credit Request</h3>
+        <label for="idInputOne">Request ID:</label>
+        <input type="number" id="idInputOne" value="1" min="1">
+        <button type="submit" onclick="getrequestcredit() "style="display: block; margin: 0 auto;">Get Request</button>
+    </div> -->
 
 	<!--side navigation-->
 	<div id="mySidenav" class="sidenav">
 		<a id="profile-home" href="user-profile.html">Profile Home</a>
 		<a id="request-page" href="request-page.html">Make a Request (Credit, Loan, Job)</a>
-        <a id="request-page" href="bankWelcomePage.html">Log Out</a>
+        <a id="welcome-page" href="bankWelcomePage.html">Log Out</a>
 	</div>
 	<!--end of side navigation-->
 
-	<table>
+	<div id="tableA">
+    <table>
 		<tbody id="userProfile">
-
+            <tr>
+                <td>ACCOUNT</td>
+                <td id="acct">-</td>
+            </tr>
+            <tr>
+                <td>USER</td>
+                <td id="user">-</td>
+            </tr>
+            <tr>
+                <td>TYPE</td>
+                <td id="type">-</td>
+            </tr>
+            <tr>
+                <td>BALANCE</td>
+                <td id="bal">-</td>
+            </tr>
 		</tbody>
 	</table>
+    </div>
+    
+    <div id="tableB">
+    <table>
+        <tbody id ="creditRequest">
+            <tr>
+                <td>ID</td>
+                <td id="req">-</td>
+            </tr>
+            <tr>
+                <td>USER</td>
+                <td id="user2">-</td>
+            </tr>
+            <tr>
+                <td>TYPE</td>
+                <td id="type2">-</td>
+            </tr>
+            <tr>
+                <td>LIMIT</td>
+                <td id="limit">-</td>
+            </tr>
+            <tr>
+                <td>STATUS</td>
+                <td id="status">-</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
     
 </body>
 <script>
-window.onload = getUser();
-let name = sessionStorage.getItem('firstName');
+
 document.getElementById("mainbody").innerHTML = "Welcome, to your profile"
+    acct = document.getElementById("acct").innerHTML
+    userId = parseInt(sessionStorage.getItem('userID'))
+   // const user = document.getElementById("user").innerHTML
+    type = document.getElementById("type").innerHTML
+    bal = document.getElementById("bal").innerHTML
+
+function populateTableA(body) {
+    console.log(body)
+    //body = JSON.parse(body);
+    console.log(typeof(body));
+    document.getElementById("acct").innerHTML = body['acctId']
+    document.getElementById("user").innerHTML = body['userId']
+    document.getElementById("type").innerHTML = body['accountType']
+    document.getElementById("bal").innerHTML = body['accountBalance']
+}
+
+function populateTableB(body) {
+    console.log(body)
+    //body = JSON.parse(body);
+    console.log(typeof(body));
+    document.getElementById("req").innerHTML = body['reqId']
+    document.getElementById("user2").innerHTML = body['userId']
+    document.getElementById("type2").innerHTML = body['cardType']
+    document.getElementById("limit").innerHTML = body['creditLimit']
+    document.getElementById("status").innerHTML = body['reqStatus']
+}
+
+async function getrequestcredit() {
+    user_id = parseInt(sessionStorage.getItem('userID'))
+    const url = `http://127.0.0.1:5000/requests/credit/${user_id}`
+    const httpResponse = await fetch(url)
+    const body = await httpResponse.json()
+    console.log(body)
+    populateTableB(body)
+}
+
+async function putAcct(){
+
+}
+
+async function delAcct(){
+
+}
 
 async function getUser() {
+    correct = false;
+    // let acct = document.getElementById("acct").innerHTML
+    // let userId = parseInt(sessionStorage.getItem('userID'))
+    // //let user = document.getElementById("user").innerHTML
+    // let type = document.getElementById("type").innerHTML
+    // let bal = document.getElementById("bal").innerHTML
+
     console.log("Getting Accounts")
-    const httpResponse = await fetch("http://127.0.0.1:5000/accounts/1")
+
+    const httpResponse = await fetch(`http://127.0.0.1:5000/accounts/${userId}`)
     console.log(httpResponse)
 
     const body = await httpResponse.json()
     
     let result = []
     for(var i in body){
-        result.push(body);
+        result.push(body[i])
     }
+    console.log(result);
+    // acct = result[i].acctId
+    // user = result[i].userId
+    // type = result[i].accountType
+    // bal = result[i].accountBalance
 
-    console.log(result)
-
-    function drawTable(tbody) {
-        var tbody = document.getElementById("userProfile");
-        var accounts = new Array();
-        accounts[0] = {account: null, user: null, type: null, balance: null};
-        var headerNames = Object.getOwnPropertyNames(accounts[0]);
-        var columnCount = headerNames.length;
-        var row = tbody.insertRow(-1);
-        for (var i = 0; i < columnCount; i++) {
-            var headerCell = document.createElement("TH");
-            headerCell.innerHTML = headerNames[i];
-            row.appendChild(headerCell);
-        }
-        
-        var tr, td;
-    
     for (var i = 0; i < result.length; i++) {
-        tr = tbody.insertRow(tbody.rows.length);
-        td = tr.insertCell(tr.cells.length);
-        td.setAttribute("align", "center");
+	    acct = result[i].acct_id;
+	    user = result[i].user_id;
+	    type = result[i].account_type;
+	    bal = result[i].account_balance
 
-        td.innerHTML = result[i].acctId;
-        td = tr.insertCell(tr.cells.length);
-        td.innerHTML = result[i].userId;
-        td = tr.insertCell(tr.cells.length);
-        td.innerHTML = result[i].accountType;
-        td = tr.insertCell(tr.cells.length);
-        td.innerHTML = result[i].accountBalance;
     }
+
+    populateTableA(result[0])
+
+    // const url = `http://127.0.0.1:5000/accounts/${userId}`;
+
+    // const request = {
+    //     'acctId': acct,
+    //     'userId': userId,
+    //     'accountType': type,
+    //     'accountBalance': bal
+	// }
+
+	// console.log(request)
+
+	// const httpresponse = fetch(url, {
+	// 	method: 'GET',
+	// 	body: JSON.stringify(request),
+	// 	headers: {
+	// 		"Content-type": "request/json; charset=UTF-8"
+	// 	}
+	// });
+
+	// httpresponse.then(response => {
+	// 	if(response.status==200){
+    //         correct = true;
+	// 	}else{
+	// 		alert("Please try again - Could not get accounts");
+    //         console.log("Failure"); 
+	// 	}
+	// })
+    
+    
 }
-    drawTable("userProfile");
-}
+
+
+
 </script>
 <!--JS file for navigation top-->
 <script src="navigation-top.js"></script>
