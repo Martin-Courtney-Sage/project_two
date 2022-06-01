@@ -47,12 +47,7 @@ Run the Python and Java code which should start the backend server, then open th
 
 ## Contributors
 
-> Here list the people who have contributed to this project.
-* Courtney-Sage 
-* Gabriel 
-* James 
-* Naomi 
-* Vision
+> Here list the people who have contributed to this project. Courtney-Sage, Gabriel, James, Naomi, Vision
 
 ## License
 
