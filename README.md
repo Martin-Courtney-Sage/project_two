@@ -6,7 +6,7 @@ The Banking Application focuses on user interaction and the basic functionalitie
 
 ## Technologies Used
 
-Postgres SQL through Amazon RDS - version 13.4
+* Postgres SQL through Amazon RDS - version 13.4
 * Python - version 3
 * Psycopg2
 * PyTest
