@@ -43,7 +43,7 @@ git clone https://github.com/Martin-Courtney-Sage/project_two.git
 
 Start the Postgres server and run the sql script. Enter your database details and put it in resources folder as connection.properties
 
-Run the Python and Java code which should start the backend server, then open the index.html file in the Frontend.
+Run the Python and Java code which should start the backend server, then open the bankWelcomePage.html file in the Frontend.
 
 ## Contributors
 
