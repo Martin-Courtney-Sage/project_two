@@ -55,7 +55,7 @@ Run the Python and Java code which should start the backend server, then open th
 
 ## License
 
-Copyright (C) 2022 Authers at Revature LLC. 
+Copyright (C) 2022 - Authers at Revature LLC. 
 
 The {Banking Application} project can not be copied and/or distributed without the express
-permission of Authors <{courtney306@revature.net}>.
+permission of authors <{courtney306@revature.net}>.
