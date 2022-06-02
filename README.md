@@ -39,6 +39,15 @@ To-do list:
 Create local repository using the following command:
 * git clone https://github.com/Martin-Courtney-Sage/project_two.git
 
+Create the local branchs within your repository. Go into the repository folder that was cloned to your local computer. Then open the command prompt within that folder. Type the following code:
+* git branch
+* git checkout Frontend
+* git checkout PythonBackend
+* git checkout JavaBackend
+* git checkout database
+
+This will copy over the repository branches into your local repository, allowing you to access the files/code within them. You can do another *git branch* command to check that all the branches are there in your local repository afterwards if you wish. Also, use the *git checkout branchName* code to switch between the different local branches once they are set up.
+
 ## Usage
 
 There are 5 branches: main, database, PythonBackend, JavaBackend, Frontend
