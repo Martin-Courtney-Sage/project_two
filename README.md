@@ -37,7 +37,7 @@ To-do list:
 ## Getting Started
 
 Create local repository using the following command:
-git clone https://github.com/Martin-Courtney-Sage/project_two.git
+* git clone https://github.com/Martin-Courtney-Sage/project_two.git
 
 ## Usage
 
